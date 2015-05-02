@@ -11,6 +11,10 @@
 |
 */
 
-$app->get('/', function() use ($app) {
-    return $app->welcome();
+$app->get('/', function() {
+    return view('home.index');
+});
+
+$app->get('/modules', function() {
+    return view('modules.index');
 });
