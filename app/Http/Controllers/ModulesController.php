@@ -1,5 +1,6 @@
 <?php namespace App\Http\Controllers;
 
+use \Illuminate\Support\Facades\Request;
 use \App\Http\Models\Module;
 
 class ModulesController extends Controller
@@ -17,7 +18,7 @@ class ModulesController extends Controller
     public function addDo() {
 
         $data = Request::all();
-        return Module::create($data) ? /*redirect()->route('fields')*/ 'saved' : view('modules.detail');
+        return Module::create($data) ? redirect()->route('modules') : view('modules.detail');
     }
 
     public function detail($id) {
@@ -29,6 +30,6 @@ class ModulesController extends Controller
 
         $data = Request::all();
         $saved = Module::findOrFail($id)->update($data);
-        return $saved ? /*redirect()->route('fields')*/ 'saved' : view('modules.detail');
+        return $saved ? redirect()->route('modules') : view('modules.detail');
     }
 }

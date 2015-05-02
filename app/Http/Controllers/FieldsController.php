@@ -1,9 +1,9 @@
 <?php namespace App\Http\Controllers;
 
+use \Illuminate\Support\Facades\Request;
 use \App\Http\Models\Field;
 use \App\Http\Models\FieldGroup;
 use \App\Http\Models\FieldType;
-use \Illuminate\Support\Facades\Request;
 
 class FieldsController extends Controller
 {
