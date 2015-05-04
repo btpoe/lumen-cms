@@ -3,7 +3,7 @@
 class PlainText extends FieldType {
 
     public function __construct() {
-        $this->Checkbox = new Checkbox();
+        $this->Checkboxes = new Checkboxes();
     }
 
     protected function _config() {
@@ -11,7 +11,7 @@ class PlainText extends FieldType {
         $output  = '';
         $output .= $this->renderConfig('placeholder', ['label' => 'Placeholder Text', 'instructions' => 'The text that will be shown if the field doesn\'t have a value.']);
         $output .= $this->renderConfig('max_length', ['instructions' => 'The text that will be shown if the field doesn\'t have a value.']);
-        $output .= $this->Checkbox->renderConfig('allow_break', ['label' => 'Allow Line Breaks']);
+        $output .= $this->Checkboxes->renderConfig('allow_break', ['label' => 'Allow Line Breaks']);
         return $output;
     }
 
