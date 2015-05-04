@@ -1,10 +1,15 @@
 <?php namespace App\Http\FieldTypes;
 
-class Checkbox extends FieldType {
+class Checkboxes extends FieldType {
+
+    public function __construct() {
+        $this->Table = new Table();
+    }
 
     protected function _config() {
 
         $output  = "";
+        $output .= $this->Table->renderConfig('options', ['label' => 'Checkbox Options']);
         return $output;
     }
 

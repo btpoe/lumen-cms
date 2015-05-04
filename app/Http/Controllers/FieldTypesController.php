@@ -7,7 +7,7 @@ class FieldTypesController extends Controller
 {
     public function index() {
 
-        return view('field_types.index', ['fieldTypes' => FieldType::all()]);
+        return view('field_types.index', ['fieldTypes' => FieldType::all()->where('is_core', '0')]);
     }
 
     public function add() {

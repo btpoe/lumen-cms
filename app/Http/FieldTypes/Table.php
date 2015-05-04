@@ -5,6 +5,7 @@ class Table extends FieldType {
     protected function _config() {
 
         $output  = "";
+        $output .= $this->renderConfig('table', ['label' => 'Table Settings']);
         return $output;
     }
 

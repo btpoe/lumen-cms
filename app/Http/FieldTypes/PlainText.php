@@ -3,6 +3,7 @@
 class PlainText extends FieldType {
 
     public function __construct() {
+        $this->PlainText = $this;
         $this->Checkboxes = new Checkboxes();
     }
 
