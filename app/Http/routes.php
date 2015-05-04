@@ -34,3 +34,10 @@ $app->get('/fields/add', ['as' => 'field-add', 'uses' => '\App\Http\Controllers\
 $app->post('/fields/add', ['as' => 'field-add-do', 'uses' => '\App\Http\Controllers\FieldsController@addDo']);
 $app->get('/fields/{id}', ['as' => 'field-detail', 'uses' => '\App\Http\Controllers\FieldsController@detail']);
 $app->post('/fields/{id}', ['as' => 'field-detail-do', 'uses' => '\App\Http\Controllers\FieldsController@detailDo']);
+
+$app->get('/field-types', ['as' => 'field-types', 'uses' => '\App\Http\Controllers\FieldTypesController@index']);
+$app->get('/field-types/add', ['as' => 'field-type-add', 'uses' => '\App\Http\Controllers\FieldTypesController@add']);
+$app->post('/field-types/add', ['as' => 'field-type-add-do', 'uses' => '\App\Http\Controllers\FieldTypesController@addDo']);
+$app->get('/field-types/{id}', ['as' => 'field-type-detail', 'uses' => '\App\Http\Controllers\FieldTypesController@detail']);
+$app->post('/field-types/{id}', ['as' => 'field-type-detail-do', 'uses' => '\App\Http\Controllers\FieldTypesController@detailDo']);
+$app->get('/field-types/{id}/config', ['as' => 'field-type-config', 'uses' => '\App\Http\Controllers\FieldTypesController@config']);

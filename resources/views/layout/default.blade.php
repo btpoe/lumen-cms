@@ -5,7 +5,9 @@
 </head>
 <body style="display:none;"
       data-ui="stripe"
-      data-icon-font="font-awesome">
+      data-icon-font="font-awesome"
+      data-project-css="screen.css"
+      data-project-js="app.js">
     <header>
         <a href="#" class="navigation-trigger">Show Navigation</a>
         <nav class="navigation">
@@ -14,6 +16,7 @@
                 <li><a href="{{ route('templates')}}">Templates</a></li>
                 <li><a href="{{ route('modules')}}">Modules</a></li>
                 <li><a href="{{ route('fields')}}">Fields</a></li>
+                <li><a href="{{ route('field-types')}}">Field Types</a></li>
             </ul>
         </nav>
     </header>

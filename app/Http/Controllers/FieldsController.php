@@ -14,13 +14,7 @@ class FieldsController extends Controller
 
     public function add() {
 
-        return $this->_detail(Field::find(1)->newInstance());
-    }
-
-    public function addDo() {
-
-        $data = Request::all();
-        return Field::create($data) ? /*redirect()->route('fields')*/ 'saved' : view('fields.detail');
+        return $this->_detail(new Field);
     }
 
     public function detail($id) {
@@ -28,17 +22,31 @@ class FieldsController extends Controller
         return $this->_detail(Field::findOrFail($id));
     }
 
-    public function _detail($field) {
+    private function _detail($field) {
 
         $fieldGroups = FieldGroup::all();
         $fieldTypes = FieldType::all();
         return view('fields.detail', compact('field', 'fieldGroups', 'fieldTypes'));
     }
 
-    public function detailDo($id) {
+    public function addDo() {
 
         $data = Request::all();
-        $saved = Field::findOrFail($id)->update($data);
-        return $saved ? /*redirect()->route('fields')*/ 'saved' : view('fields.detail');
+        unset($data['settings']);
+        return $this->_detailDo(Field::create($data));
+    }
+
+    public function detailDo($id) {
+
+        return $this->_detailDo(Field::findOrFail($id));
+    }
+
+    private function _detailDo($field) {
+
+        $data = Request::all();
+        $data['settings'] = json_encode($data['settings']);
+
+        $saved = $field->update($data);
+        return $saved ? redirect()->route('fields') : view('fields.detail');
     }
 }

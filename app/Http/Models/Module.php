@@ -8,4 +8,8 @@ class Module extends Model {
         'handle'
     ];
 
+    public function fields() {
+        return $this->belongsToMany('\App\Http\Models\Field')->withPivot('sort');
+    }
+
 }

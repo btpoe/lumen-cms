@@ -1,0 +1,10 @@
+{
+  "name": "lumen-cms",
+  "version": "0.0.1",
+  "description": "Just another CMS",
+  "homepage": "https://github.com/btpoe/lumen-cms",
+  "license": "MIT",
+  "dependencies": {
+    "dragula.js": "~1.5.1"
+  }
+}

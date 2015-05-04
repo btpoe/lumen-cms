@@ -14,10 +14,14 @@ class Field extends Model {
 
     public function group()
     {
-        return $this->hasOne('FieldGroup');
+        return $this->belongsTo('\App\Http\Models\FieldGroup');
     }
     public function type()
     {
-        return $this->hasOne('FieldType');
+        return $this->belongsTo('\App\Http\Models\FieldType');
+    }
+
+    public function modules() {
+        return $this->belongsToMany('\App\Http\Models\Module');
     }
 }

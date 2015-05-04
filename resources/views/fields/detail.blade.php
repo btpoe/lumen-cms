@@ -34,9 +34,7 @@
         </div>
         <fieldset>
             <legend>Settings</legend>
-            <div class="formplate">
-
-            </div>
+            <div id="FieldTypeSettings" data-settings="{{ $field->settings }}"></div>
         </fieldset>
         <button class="button red">Save</button>
     </form>

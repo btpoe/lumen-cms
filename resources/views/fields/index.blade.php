@@ -8,13 +8,15 @@
             <tr>
                 <th>Title</th>
                 <th>Type</th>
+                <th>Group</th>
             </tr>
         </thead>
         <tbody>
             @foreach($fields as $field)
                 <tr>
                     <td><a href="{{ route('field-detail', ['id' => $field->id]) }}">{{ $field->title }}</a></td>
-                    <td>{{ $field->type_id }}</td>
+                    <td>{{ $field->type->title }}</td>
+                    <td>{{ $field->group->title }}</td>
                 </tr>
             @endforeach
         </tbody>
