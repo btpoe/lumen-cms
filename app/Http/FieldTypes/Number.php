@@ -44,8 +44,7 @@ class Number extends FieldType {
         $min = isset($params['min']) ? "min=\"{$params['min']}\"" : '';
         $max = isset($params['max']) ? "max=\"{$params['max']}\"" : '';
         $decimal = isset($params['decimal']) ? "data-decimal=\"{$params['decimal']}\"" : '';
-        $value = isset($params['value']) ? "value=\"{$params['value']}\"" : '';
-        return $parentOptions + compact('min', 'max', 'decimal', 'value');
+        return $parentOptions + compact('min', 'max', 'decimal');
     }
 
 }

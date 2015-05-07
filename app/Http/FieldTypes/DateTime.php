@@ -49,11 +49,4 @@ class DateTime extends FieldType {
         return $settings;
     }
 
-    protected function fillOptions($field, $params) {
-
-        $parentOptions = parent::fillOptions($field, $params);
-        $value = isset($params['value']) ? "value=\"{$params['value']}\"" : null;
-        return $parentOptions + compact('value');
-    }
-
 }

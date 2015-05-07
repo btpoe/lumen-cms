@@ -44,13 +44,4 @@ class RichText extends FieldType {
         return $settings;
     }
 
-    protected function fillOptions($field, $params) {
-
-        $parentOptions = parent::fillOptions($field, $params);
-        $value = isset($params['value']) ? "value=\"{$params['value']}\"" : '';
-        $placeholder = isset($params['placeholder']) ? "placeholder=\"{$params['placeholder']}\"" : '';
-        $maxlength = isset($params['max_length']) ? "maxlength=\"{$params['max_length']}\"" : '';
-        return $parentOptions + compact('value', 'placeholder', 'maxlength');
-    }
-
 }

@@ -15,6 +15,15 @@ $app->get('/', function() {
     return view('home.index');
 });
 
+
+$app->get('/modules', ['as' => 'modules', 'uses' => '\App\Http\Controllers\ModulesController@index']);
+$app->get('/modules/{handle}', ['as' => 'module-list', 'uses' => '\App\Http\Controllers\ModulesController@listing']);
+$app->get('/modules/{handle}/add', ['as' => 'module-add', 'uses' => '\App\Http\Controllers\ModulesController@add']);
+$app->post('/modules/{handle}/add', ['as' => 'module-add-do', 'uses' => '\App\Http\Controllers\ModulesController@addDo']);
+$app->get('/modules/{handle}/{id}', ['as' => 'module-detail', 'uses' => '\App\Http\Controllers\ModulesController@detail']);
+$app->post('/modules/{handle}/{id}', ['as' => 'module-detail-do', 'uses' => '\App\Http\Controllers\ModulesController@detailDo']);
+
+
 // settings
 
 $app->get('/settings/channels', ['as' => 'settings-channels', 'uses' => '\App\Http\Controllers\ChannelsController@index']);
@@ -25,11 +34,11 @@ $app->get('/settings/templates', ['as' => 'settings-templates', 'uses' => '\App\
 $app->get('/settings/templates/add', ['as' => 'settings-template-add', 'uses' => '\App\Http\Controllers\TemplatesController@detail']);
 $app->get('/settings/templates/{id}', ['as' => 'settings-template-detail', 'uses' => '\App\Http\Controllers\TemplatesController@detail']);
 
-$app->get('/settings/modules', ['as' => 'settings-modules', 'uses' => '\App\Http\Controllers\ModulesController@index']);
-$app->get('/settings/modules/add', ['as' => 'settings-module-add', 'uses' => '\App\Http\Controllers\ModulesController@add']);
-$app->post('/settings/modules/add', ['as' => 'settings-module--add-do', 'uses' => '\App\Http\Controllers\ModulesController@addDo']);
-$app->get('/settings/modules/{id}', ['as' => 'settings-module-detail', 'uses' => '\App\Http\Controllers\ModulesController@detail']);
-$app->post('/settings/modules/{id}', ['as' => 'settings-module-detail-do', 'uses' => '\App\Http\Controllers\ModulesController@detailDo']);
+$app->get('/settings/modules', ['as' => 'settings-modules', 'uses' => '\App\Http\Controllers\ModulesController@settings_index']);
+$app->get('/settings/modules/add', ['as' => 'settings-module-add', 'uses' => '\App\Http\Controllers\ModulesController@settings_add']);
+$app->post('/settings/modules/add', ['as' => 'settings-module-add-do', 'uses' => '\App\Http\Controllers\ModulesController@settings_addDo']);
+$app->get('/settings/modules/{id}', ['as' => 'settings-module-detail', 'uses' => '\App\Http\Controllers\ModulesController@settings_detail']);
+$app->post('/settings/modules/{id}', ['as' => 'settings-module-detail-do', 'uses' => '\App\Http\Controllers\ModulesController@settings_detailDo']);
 
 $app->get('/settings/fields', ['as' => 'settings-fields', 'uses' => '\App\Http\Controllers\FieldsController@index']);
 $app->get('/settings/fields/add', ['as' => 'settings-field-add', 'uses' => '\App\Http\Controllers\FieldsController@add']);

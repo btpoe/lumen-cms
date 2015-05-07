@@ -1,5 +1,6 @@
 <?php namespace App\Http\Controllers;
 
+use \Illuminate\Support\Facades\DB;
 use \Illuminate\Support\Facades\Request;
 use \App\Http\Models\Module;
 use \App\Http\Services\ModuleService;
@@ -13,44 +14,99 @@ class ModulesController extends Controller
         return view('modules.index', ['modules' => Module::all()]);
     }
 
-    public function add() {
+    public function listing($handle) {
 
-        return $this->_detail(new Module);
+        $appDB = DB::connection('app_mysql');
+        return view('modules.listing', ['handle' => $handle, 'entries' => $appDB->table($handle)->get()]);
+    }
+
+    public function add($handle) {
+
+        $module = Module::where('handle', $handle)->firstOrFail();
+        $fields = $module->fields()->orderBy('pivot_sort')->get();
+        $fieldTypes = [];
+        $entry = new \stdClass();
+        $entry->title = null;
+        foreach($fields as $field) {
+            $entry->{$field->handle} = null;
+            if (empty($fieldTypes[$field->type_id])) {
+                $fieldTypes[$field->type_id] = app()->make('\App\Http\FieldTypes\\'.$field->type->handle);
+            }
+        }
+        return view('modules.detail', compact('entry', 'fields', 'fieldTypes'));
+    }
+
+    public function addDo($handle) {
+
+        $data = Request::all();
+        $module = Module::where('handle', $handle)->firstOrFail();
+        $fields = $module->fields()->orderBy('pivot_sort')->get();
+        $fieldTypes = [];
+        $valid = false;
+        $fieldTypes[PLAIN_TEXT_ID] = app()->make('\App\Http\FieldTypes\PlainText');
+        $data['title'] = $fieldTypes[PLAIN_TEXT_ID]->validate($data['title'], ['maxlength' => 255]);
+        foreach($fields as $field) {
+            if (empty($fieldTypes[$field->type_id])) {
+                $fieldTypes[$field->type_id] = app()->make('\App\Http\FieldTypes\\'.$field->type->handle);
+            }
+            $data[$field->handle] = $fieldTypes[$field->type_id]->validate($data[$field->handle], json_decode($field->settings, true));
+            if (!$valid = !!$data[$field->handle]) {
+                break;
+            }
+        }
+        $appDB = DB::connection('app_mysql');
+        $saved = $valid && $appDB->table($handle)->insert($data);
+        return $saved ? redirect()->route('module-list', ['handle' => $handle]) : view('modules.detail', compact('entry', 'fields', 'fieldTypes'));
     }
 
     public function detail($id) {
 
-        return $this->_detail(Module::findOrFail($id));
+    }
+
+
+    public function settings_index() {
+
+        return view('modules.settings_index', ['modules' => Module::all()]);
+    }
+
+    public function settings_add() {
+
+        return $this->_settings_detail(new Module);
+    }
+
+    public function settings_detail($id) {
+
+        return $this->_settings_detail(Module::findOrFail($id));
     }
 
     /**
      * @param Module $module
      * @return \Illuminate\View\View
      */
-    public function _detail(Module $module) {
+    public function _settings_detail(Module $module) {
 
         $activeFields = $module->fields()->orderBy('pivot_sort')->get();
         $activeFieldsIds = $activeFields->keyBy('id')->keys()->toArray();
         $fields = Field::select('*')->whereNotIn('id', $activeFieldsIds)->get()->groupBy('group_id');
         $fieldGroups = FieldGroup::all();
-        return view('modules.detail', compact('module', 'activeFields', 'fields', 'fieldGroups'));
+        return view('modules.settings_detail', compact('module', 'activeFields', 'fields', 'fieldGroups'));
     }
 
-    public function addDo() {
+    public function settings_addDo() {
 
         $data = Request::all();
         $module = Module::create($data);
-        return $this->_detailDo($module);
+        return $this->_settings_detailDo($module);
     }
 
-    public function detailDo($id) {
+    public function settings_detailDo($id) {
 
         $module = Module::findOrFail($id);
         $oldModuleSchema = $module->toArray();
-        return $this->_detailDo($module, $oldModuleSchema);
+        return $this->_settings_detailDo($module, $oldModuleSchema);
     }
 
-    public function _detailDo(Module $module, $oldModuleSchema = false) {
+    public function _settings_detailDo(Module $module, $oldModuleSchema = false) {
 
         $data = Request::all();
 
@@ -68,7 +124,7 @@ class ModulesController extends Controller
                     $module->fields()->sync($fields) &&
                     ModuleService::generateTable($module, $oldModuleSchema);
 
-        return $saved ? redirect()->route('settings-modules') : view('modules.detail', [$module->id]);
+        return $saved ? redirect()->route('settings-modules') : view('modules.settings_detail');
 
     }
 }

@@ -93,4 +93,6 @@ $app->singleton(
 
 require __DIR__.'/../app/Http/routes.php';
 
+define('PLAIN_TEXT_ID', 10);
+
 return $app;

@@ -11,7 +11,16 @@ class Color extends FieldType {
 
         extract($this->fillOptions($field, $params));
 
-        $output = '<div class="formplate"></div>';
+        $output = '<div class="formplate">';
+
+        $output .= "<label for=\"$fieldId\">$title</label>";
+        if ($instructions) {
+            $output .= "<p><small>$instructions</small></p>";
+        }
+        $output .= "<input type=\"color\" id=\"$fieldId\" name=\"$field\" $value />";
+
+
+        $output .= '</div>';
 
         return $output;
     }

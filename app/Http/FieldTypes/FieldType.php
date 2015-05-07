@@ -31,6 +31,10 @@ class FieldType {
         return false;
     }
 
+    public function validate($data, $settings) {
+        return $data;
+    }
+
     protected function fillOptions($field, $params) {
 
         $fieldHuman = ucwords(str_replace(['_', '-', '"'], ' ', preg_replace('/_id$/', '', $field)));
@@ -54,6 +58,8 @@ class FieldType {
             $field = "{$this->namespace}[$field]";
         }
 
-        return compact('field', 'fieldId', 'title', 'instructions');
+        $value = isset($params['value']) ? "value=\"{$params['value']}\"" : '';
+
+        return compact('field', 'fieldId', 'title', 'instructions', 'value');
     }
 }

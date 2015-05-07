@@ -41,6 +41,7 @@ class ModuleService {
             $appSchema->create($module->handle, function($table) use ($module)
             {
                 $table->increments('id');
+                $table->increments('title');
 
                 foreach($module->fields()->get() as $field) {
                     $table->string($field->handle);
