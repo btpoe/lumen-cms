@@ -17,7 +17,7 @@
 // ---------------------------------------------------------------------------------------
 @mixin form-select() {
 	.fp-select {
-		@include display(inline-block);
+		@include display(block);
 		@include position(relative);
 		@include width(auto);
 		@include text-font('formplate');
