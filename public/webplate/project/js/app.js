@@ -27,7 +27,7 @@ var app = new function App() {
 		var originalSettings = settingsWrap.data('settings');
 		$('#FieldType').on('change', function () {
 			var id = this.value;
-			$.get('/field-types/' + id + '/config').done(function (results) {
+			$.get('/settings/field-types/' + id + '/config').done(function (results) {
 				settingsWrap.html(results);
 				form.populate(originalSettings);
 				form.find('[type="checkbox"],[type="radio"]').each(function () {
@@ -765,6 +765,7 @@ function FtTable(dom, options) {
 	this.tbody = this.table.find('tbody');
 	this.rowTemplate = this.tbody.children('tr').eq(0).clone();
 	this.addRowBtn = this.wrap.find('.add-row');
+	this.namespace = this.rowTemplate.find(':input').eq(0).data('namespace');
 
 	bindEvents(this);
 
@@ -778,12 +779,13 @@ FtTable.prototype.setOptions = function (options) {
 };
 
 // attach public methods here
-FtTable.prototype.addRow = function () {
+FtTable.prototype.addRow = function (data) {
+	var ft = this;
 	var newRow = this.rowTemplate.clone();
 	this.tbody.append(newRow);
 	newRow.find(':input').each(function (i, elem) {
 		i = $(elem);
-		elem.name = i.data('namespace') + '[' + newRow.index() + '][' + i.data('field') + ']';
+		elem.name = ft.namespace + '[' + newRow.index() + '][' + i.data('field') + ']';
 	});
 };
 

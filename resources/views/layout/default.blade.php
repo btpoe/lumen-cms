@@ -12,11 +12,11 @@
         <a href="#" class="navigation-trigger">Show Navigation</a>
         <nav class="navigation">
             <ul>
-                <li><a href="{{ route('channels')}}">Channels</a></li>
-                <li><a href="{{ route('templates')}}">Templates</a></li>
-                <li><a href="{{ route('modules')}}">Modules</a></li>
-                <li><a href="{{ route('fields')}}">Fields</a></li>
-                <li><a href="{{ route('field-types')}}">Field Types</a></li>
+                <li><a href="{{ route('settings-channels')}}">Channels</a></li>
+                <li><a href="{{ route('settings-templates')}}">Templates</a></li>
+                <li><a href="{{ route('settings-modules')}}">Modules</a></li>
+                <li><a href="{{ route('settings-fields')}}">Fields</a></li>
+                <li><a href="{{ route('settings-field-types')}}">Field Types</a></li>
             </ul>
         </nav>
     </header>

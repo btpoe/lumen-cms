@@ -14,7 +14,7 @@
         <tbody>
             @foreach($fields as $field)
                 <tr>
-                    <td><a href="{{ route('field-detail', ['id' => $field->id]) }}">{{ $field->title }}</a></td>
+                    <td><a href="{{ route('settings-field-detail', ['id' => $field->id]) }}">{{ $field->title }}</a></td>
                     <td>{{ $field->type->title }}</td>
                     <td>{{ $field->group->title }}</td>
                 </tr>
@@ -22,6 +22,6 @@
         </tbody>
     </table>
 
-    <a class="button green" href="{{ route('field-add') }}"><i class="fa fa-plus"></i> Add a Field</a>
+    <a class="button green" href="{{ route('settings-field-add') }}"><i class="fa fa-plus"></i> Add a Field</a>
 
 @stop

@@ -15,29 +15,31 @@ $app->get('/', function() {
     return view('home.index');
 });
 
-$app->get('/channels', ['as' => 'channels', 'uses' => '\App\Http\Controllers\ChannelsController@index']);
-$app->get('/channels/add', ['as' => 'channel-add', 'uses' => '\App\Http\Controllers\ChannelsController@detail']);
-$app->get('/channels/{id}', ['as' => 'channel-detail', 'uses' => '\App\Http\Controllers\ChannelsController@detail']);
+// settings
 
-$app->get('/templates', ['as' => 'templates', 'uses' => '\App\Http\Controllers\TemplatesController@index']);
-$app->get('/templates/add', ['as' => 'template-add', 'uses' => '\App\Http\Controllers\TemplatesController@detail']);
-$app->get('/templates/{id}', ['as' => 'template-detail', 'uses' => '\App\Http\Controllers\TemplatesController@detail']);
+$app->get('/settings/channels', ['as' => 'settings-channels', 'uses' => '\App\Http\Controllers\ChannelsController@index']);
+$app->get('/settings/channels/add', ['as' => 'settings-channel-add', 'uses' => '\App\Http\Controllers\ChannelsController@detail']);
+$app->get('/settings/channels/{id}', ['as' => 'settings-channel-detail', 'uses' => '\App\Http\Controllers\ChannelsController@detail']);
 
-$app->get('/modules', ['as' => 'modules', 'uses' => '\App\Http\Controllers\ModulesController@index']);
-$app->get('/modules/add', ['as' => 'module-add', 'uses' => '\App\Http\Controllers\ModulesController@add']);
-$app->post('/modules/add', ['as' => 'module-add-do', 'uses' => '\App\Http\Controllers\ModulesController@addDo']);
-$app->get('/modules/{id}', ['as' => 'module-detail', 'uses' => '\App\Http\Controllers\ModulesController@detail']);
-$app->post('/modules/{id}', ['as' => 'module-detail-do', 'uses' => '\App\Http\Controllers\ModulesController@detailDo']);
+$app->get('/settings/templates', ['as' => 'settings-templates', 'uses' => '\App\Http\Controllers\TemplatesController@index']);
+$app->get('/settings/templates/add', ['as' => 'settings-template-add', 'uses' => '\App\Http\Controllers\TemplatesController@detail']);
+$app->get('/settings/templates/{id}', ['as' => 'settings-template-detail', 'uses' => '\App\Http\Controllers\TemplatesController@detail']);
 
-$app->get('/fields', ['as' => 'fields', 'uses' => '\App\Http\Controllers\FieldsController@index']);
-$app->get('/fields/add', ['as' => 'field-add', 'uses' => '\App\Http\Controllers\FieldsController@add']);
-$app->post('/fields/add', ['as' => 'field-add-do', 'uses' => '\App\Http\Controllers\FieldsController@addDo']);
-$app->get('/fields/{id}', ['as' => 'field-detail', 'uses' => '\App\Http\Controllers\FieldsController@detail']);
-$app->post('/fields/{id}', ['as' => 'field-detail-do', 'uses' => '\App\Http\Controllers\FieldsController@detailDo']);
+$app->get('/settings/modules', ['as' => 'settings-modules', 'uses' => '\App\Http\Controllers\ModulesController@index']);
+$app->get('/settings/modules/add', ['as' => 'settings-module-add', 'uses' => '\App\Http\Controllers\ModulesController@add']);
+$app->post('/settings/modules/add', ['as' => 'settings-module--add-do', 'uses' => '\App\Http\Controllers\ModulesController@addDo']);
+$app->get('/settings/modules/{id}', ['as' => 'settings-module-detail', 'uses' => '\App\Http\Controllers\ModulesController@detail']);
+$app->post('/settings/modules/{id}', ['as' => 'settings-module-detail-do', 'uses' => '\App\Http\Controllers\ModulesController@detailDo']);
 
-$app->get('/field-types', ['as' => 'field-types', 'uses' => '\App\Http\Controllers\FieldTypesController@index']);
-$app->get('/field-types/add', ['as' => 'field-type-add', 'uses' => '\App\Http\Controllers\FieldTypesController@add']);
-$app->post('/field-types/add', ['as' => 'field-type-add-do', 'uses' => '\App\Http\Controllers\FieldTypesController@addDo']);
-$app->get('/field-types/{id}', ['as' => 'field-type-detail', 'uses' => '\App\Http\Controllers\FieldTypesController@detail']);
-$app->post('/field-types/{id}', ['as' => 'field-type-detail-do', 'uses' => '\App\Http\Controllers\FieldTypesController@detailDo']);
-$app->get('/field-types/{id}/config', ['as' => 'field-type-config', 'uses' => '\App\Http\Controllers\FieldTypesController@config']);
+$app->get('/settings/fields', ['as' => 'settings-fields', 'uses' => '\App\Http\Controllers\FieldsController@index']);
+$app->get('/settings/fields/add', ['as' => 'settings-field-add', 'uses' => '\App\Http\Controllers\FieldsController@add']);
+$app->post('/settings/fields/add', ['as' => 'settings-field-add-do', 'uses' => '\App\Http\Controllers\FieldsController@addDo']);
+$app->get('/settings/fields/{id}', ['as' => 'settings-field-detail', 'uses' => '\App\Http\Controllers\FieldsController@detail']);
+$app->post('/settings/fields/{id}', ['as' => 'settings-field-detail-do', 'uses' => '\App\Http\Controllers\FieldsController@detailDo']);
+
+$app->get('/settings/field-types', ['as' => 'settings-field-types', 'uses' => '\App\Http\Controllers\FieldTypesController@index']);
+$app->get('/settings/field-types/add', ['as' => 'settings-field-type-add', 'uses' => '\App\Http\Controllers\FieldTypesController@add']);
+$app->post('/settings/field-types/add', ['as' => 'settings-field-type-add-do', 'uses' => '\App\Http\Controllers\FieldTypesController@addDo']);
+$app->get('/settings/field-types/{id}', ['as' => 'settings-field-type-detail', 'uses' => '\App\Http\Controllers\FieldTypesController@detail']);
+$app->post('/settings/field-types/{id}', ['as' => 'settings-field-type-detail-do', 'uses' => '\App\Http\Controllers\FieldTypesController@detailDo']);
+$app->get('/settings/field-types/{id}/config', ['as' => 'settings-field-type-config', 'uses' => '\App\Http\Controllers\FieldTypesController@config']);

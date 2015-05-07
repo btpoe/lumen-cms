@@ -24,7 +24,7 @@ var app = new (function App() {
 		var originalSettings = settingsWrap.data('settings');
 		$('#FieldType').on('change', function() {
 			var id = this.value;
-			$.get('/field-types/'+id+'/config')
+			$.get('/settings/field-types/'+id+'/config')
 				.done(function(results) {
 					settingsWrap.html(results);
 					form.populate(originalSettings);

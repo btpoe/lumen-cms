@@ -13,13 +13,13 @@
         <tbody>
             @foreach($fieldTypes as $fieldType)
                 <tr>
-                    <td><a href="{{ route('field-type-detail', ['id' => $fieldType->id]) }}">{{ $fieldType->title }}</a></td>
+                    <td><a href="{{ route('settings-field-type-detail', ['id' => $fieldType->id]) }}">{{ $fieldType->title }}</a></td>
                     <td>{{ $fieldType->handle }}</td>
                 </tr>
             @endforeach
         </tbody>
     </table>
 
-    <a class="button green" href="{{ route('field-type-add') }}"><i class="fa fa-plus"></i> Add a Field Type</a>
+    <a class="button green" href="{{ route('settings-field-type-add') }}"><i class="fa fa-plus"></i> Add a Field Type</a>
 
 @stop

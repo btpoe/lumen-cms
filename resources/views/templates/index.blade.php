@@ -12,7 +12,7 @@
         <tbody>
             @foreach($templates as $template)
                 <tr>
-                    <td><a href="{{ route('template-detail', ['id' => $template->id]) }}">{{ $template->title }}</a></td>
+                    <td><a href="{{ route('settings-template-detail', ['id' => $template->id]) }}">{{ $template->title }}</a></td>
                     <td>{{ $template->handle }}</td>
                 </tr>
             @endforeach

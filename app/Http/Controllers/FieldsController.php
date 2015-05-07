@@ -69,6 +69,6 @@ class FieldsController extends Controller
         $saved = $settings && $field->update($data);
 
         // redirect if successful, otherwise, show detail page with errors
-        return $saved ? redirect()->route('fields') : view('fields.detail')->withErrors(['Please review and fix any mistakes.']);
+        return $saved ? redirect()->route('settings-fields') : view('fields.detail')->withErrors(['Please review and fix any mistakes.']);
     }
 }

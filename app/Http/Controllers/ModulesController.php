@@ -68,7 +68,7 @@ class ModulesController extends Controller
                     $module->fields()->sync($fields) &&
                     ModuleService::generateTable($module, $oldModuleSchema);
 
-        return $saved ? redirect()->route('modules') : view('modules.detail', [$module->id]);
+        return $saved ? redirect()->route('settings-modules') : view('modules.detail', [$module->id]);
 
     }
 }

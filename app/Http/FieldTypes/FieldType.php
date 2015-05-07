@@ -33,7 +33,7 @@ class FieldType {
 
     protected function fillOptions($field, $params) {
 
-        $fieldHuman = ucwords(str_replace(['_', '-', '"'], ' ', $field));
+        $fieldHuman = ucwords(str_replace(['_', '-', '"'], ' ', preg_replace('/_id$/', '', $field)));
 
         if (empty($params['id'])) {
             $namespace = '';

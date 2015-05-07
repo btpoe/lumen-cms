@@ -40,7 +40,7 @@ class FieldTypesController extends Controller
 
         $data = Request::all();
         $saved = $fieldType->update($data);
-        return $saved ? redirect()->route('field-types') : view('field_types.detail');
+        return $saved ? redirect()->route('settings-field-types') : view('field_types.detail');
     }
 
     public function config($id) {

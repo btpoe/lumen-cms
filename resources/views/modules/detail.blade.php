@@ -1,16 +1,15 @@
+<?php
+$this->PlainText = $app->make('\App\Http\FieldTypes\PlainText');
+?>
+
 @extends('layout.default')
 
 @section('content')
 
+    <h1>{{ empty($field->id) ? 'Add' : 'Edit' }} a Module</h1>
     <form method="post">
-        <div class="formplate">
-            <label for="ModuleTitle">Title</label>
-            <input id="ModuleTitle" type="text" name="title" value="{{ $module->title }}" />
-        </div>
-        <div class="formplate">
-            <label for="ModuleHandle">Handle</label>
-            <input id="ModuleHandle" type="text" name="handle" value="{{ $module->handle }}" />
-        </div>
+        {!! $this->PlainText->render('title', ['value' => $module->title]) !!}
+        {!! $this->PlainText->render('handle', ['value' => $module->handle]) !!}
         <div class="row">
             <div>Active Fields</div>
             <div class="span-6">
