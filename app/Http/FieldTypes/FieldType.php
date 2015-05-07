@@ -19,11 +19,6 @@ class FieldType {
         return $this->_render($field, $params);
     }
 
-    public function renderConfig($field, array $params = []) {
-//        $this->namespace = 'settings';
-        return $this->_render($field, $params);
-    }
-
     protected function _render($field, array $params = []) {
         return "\nERROR: Render method not defined.\n";
     }

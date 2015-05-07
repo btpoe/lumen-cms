@@ -9,7 +9,7 @@ class Dropdown extends FieldType {
     protected function _config() {
 
         $output  = "";
-        $output .= $this->Table->renderConfig('options', [
+        $output .= $this->Table->render('options', [
             'title' => 'Dropdown Options',
             'cols' => [
                 [

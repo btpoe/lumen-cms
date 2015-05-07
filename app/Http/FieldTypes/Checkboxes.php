@@ -9,7 +9,7 @@ class Checkboxes extends FieldType {
     protected function _config() {
 
         $output  = "";
-        $output .= $this->Table->renderConfig('options', [
+        $output .= $this->Table->render('options', [
             'title' => 'Checkbox Options',
             'add_row' => 'Add an option',
             'cols' => [

@@ -5,7 +5,7 @@ class Table extends FieldType {
     protected function _config() {
 
         $output  = "";
-        $output .= $this->renderConfig('table_columns', [
+        $output .= $this->render('table_columns', [
             'title' => 'Table Options',
             'instructions' => 'Define the columns your table should have.',
             'add_row' => 'Add a column',
@@ -30,7 +30,7 @@ class Table extends FieldType {
                 ]
             ]
         ]);
-        $output .= $this->renderConfig('default_values', [
+        $output .= $this->render('default_values', [
             'instructions' => 'Define the default values for the field.',
             'cols' => [
                 [

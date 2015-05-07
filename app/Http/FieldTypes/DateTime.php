@@ -10,7 +10,7 @@ class DateTime extends FieldType {
     protected function _config() {
 
         $output  = "";
-        $output .= $this->Radios->renderConfig('show', [
+        $output .= $this->Radios->render('show', [
             'options' => [
                 'date' => 'Show date',
                 'time' => 'Show time',
@@ -18,7 +18,7 @@ class DateTime extends FieldType {
             ],
             'selected' => 'date'
         ]);
-        $output .= $this->Dropdown->renderConfig('increment', [
+        $output .= $this->Dropdown->render('increment', [
             'options' => [
                 5 => '5',
                 15 => '15',

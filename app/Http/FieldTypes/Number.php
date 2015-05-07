@@ -5,13 +5,13 @@ class Number extends FieldType {
     protected function _config() {
 
         $output  = '';
-        $output .= $this->renderConfig('min', [
+        $output .= $this->render('min', [
             'title' => 'Min Length'
         ]);
-        $output .= $this->renderConfig('max', [
+        $output .= $this->render('max', [
             'title' => 'Max Length'
         ]);
-        $output .= $this->renderConfig('decimal', [
+        $output .= $this->render('decimal', [
             'title' => 'Decimal Points'
         ]);
         return $output;

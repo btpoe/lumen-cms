@@ -10,15 +10,15 @@ class PlainText extends FieldType {
     protected function _config() {
 
         $output  = '';
-        $output .= $this->renderConfig('placeholder', [
+        $output .= $this->render('placeholder', [
             'title' => 'Placeholder Text',
             'instructions' => 'The text that will be shown if the field doesn\'t have a value.',
             'max_length' => 255
         ]);
-        $output .= $this->Number->renderConfig('max_length', [
+        $output .= $this->Number->render('max_length', [
             'min' => 0, 'max' => 255
         ]);
-        $output .= $this->Checkboxes->renderConfig('allow_break', [
+        $output .= $this->Checkboxes->render('allow_break', [
             'options' => [
                 '1' => 'Allow Line Breaks'
             ]
