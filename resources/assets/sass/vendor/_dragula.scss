@@ -1,0 +1,33 @@
+.gu-mirror {
+	position: fixed !important;
+	margin: 0 !important;
+	z-index: 9999 !important;
+}
+.gu-hide {
+	display: none !important;
+}
+.gu-unselectable {
+	user-select: none !important;
+}
+.gu-transit {
+	opacity: 0.2;
+	-ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=20)";
+	filter: alpha(opacity=20);
+}
+.gu-mirror {
+	opacity: 0.8;
+	-ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=80)";
+	filter: alpha(opacity=80);
+}
+
+[data-drag-container] {
+	min-width: 20px;
+	min-height: 20px;
+}
+
+.input-card {
+	margin: 1em 0;
+	padding: 12px;
+	list-style-type: none;
+	background: $grey-light;
+}

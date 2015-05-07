@@ -1,6 +1,6 @@
 <?php namespace App\Http\FieldTypes;
 
-class Checkboxes extends FieldType {
+class MultiSelect extends FieldType {
 
     public function __construct() {
         $this->Table = new Table();
@@ -10,17 +10,21 @@ class Checkboxes extends FieldType {
 
         $output  = "";
         $output .= $this->Table->renderConfig('options', [
-            'title' => 'Checkbox Options',
-            'add_row' => 'Add an option',
+            'title' => 'Multi-Select Options',
             'cols' => [
                 [
-                    'heading' => 'Title',
+                    'title' => 'Option Label',
                     'handle' => 'title',
                     'type' => 'single-line'
                 ],[
-                    'heading' => 'Value',
+                    'title' => 'Value',
                     'handle' => 'value',
                     'type' => 'single-line'
+                ],[
+                    'title' => 'Default',
+                    'handle' => 'selected',
+                    'type' => 'checkbox',
+                    'width' => 50
                 ]
             ]
         ]);
@@ -33,16 +37,19 @@ class Checkboxes extends FieldType {
 
         $output = '<div class="formplate">';
 
-        foreach($options as $key => $option) {
+        $output .= "<label for=\"$fieldId\">$title</label>";
+        if ($instructions) {
+            $output .= "<p><small>$instructions</small></p>";
+        }
+        $output .= "<div><span class=\"fp-select\"><select multiple id=\"$fieldId\" name=\"$field\">";
 
+        foreach($options as $option) {
             extract($option, EXTR_PREFIX_ALL, 'opt');
 
-            $output .= "<span class=\"fp-checkbox $opt_checked\"><input id=\"$fieldId$key\" type=\"checkbox\" name=\"{$field}[]\" value=\"$opt_value\" $opt_checked /></span>";
-            $output .= "<label for=\"$fieldId$key\">$opt_title</label>";
+            $output .= "<option value=\"$opt_value\" $opt_selected>$opt_title</option>";
         }
 
-        $output .= '</div>';
-
+        $output .= '</select></span></div></div>';
         return $output;
     }
 
@@ -61,7 +68,7 @@ class Checkboxes extends FieldType {
                     'value' => $key
                 ];
             }
-            $option['checked'] = isset($params['selected']) && $params['selected'] == $option['value'] ? 'checked' : '';
+            $option['selected'] = isset($params['selected']) && $params['selected'] == $option['value'] ? 'selected' : '';
             $options[] = $option;
         }
         return $parentOptions + compact('options');

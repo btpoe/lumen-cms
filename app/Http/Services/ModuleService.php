@@ -4,6 +4,13 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
 use App\Http\Models\Module;
 
+/**
+ * Class ModuleService
+ * @package App\Http\Services
+ * @param Module $module
+ * @param mixed $oldSchema
+ * @returns bool
+ */
 class ModuleService {
 
     public static function generateTable($module, $oldSchema = false) {
@@ -50,6 +57,8 @@ class ModuleService {
                 }
             });
         }
+
+        return true;
     }
 
 }

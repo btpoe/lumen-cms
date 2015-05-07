@@ -3,30 +3,40 @@
 class PlainText extends FieldType {
 
     public function __construct() {
-        $this->PlainText = $this;
+        $this->Number = new Number();
         $this->Checkboxes = new Checkboxes();
     }
 
     protected function _config() {
 
         $output  = '';
-        $output .= $this->renderConfig('placeholder', ['label' => 'Placeholder Text', 'instructions' => 'The text that will be shown if the field doesn\'t have a value.']);
-        $output .= $this->renderConfig('max_length', ['instructions' => 'The text that will be shown if the field doesn\'t have a value.']);
-        $output .= $this->Checkboxes->renderConfig('allow_break', ['label' => 'Allow Line Breaks']);
+        $output .= $this->renderConfig('placeholder', [
+            'title' => 'Placeholder Text',
+            'instructions' => 'The text that will be shown if the field doesn\'t have a value.',
+            'max_length' => 255
+        ]);
+        $output .= $this->Number->renderConfig('max_length', [
+            'min' => 0, 'max' => 255
+        ]);
+        $output .= $this->Checkboxes->renderConfig('allow_break', [
+            'options' => [
+                '1' => 'Allow Line Breaks'
+            ]
+        ]);
         return $output;
     }
 
-    protected function _render($field, array $options = []) {
+    protected function _render($field, array $params = []) {
 
-        extract($this->fillOptions($field, $options));
+        extract($this->fillOptions($field, $params));
 
         $output = '<div class="formplate">';
 
-        $output .= "<label for=\"$fieldId\">$labelText</label>";
-        if (!empty($instructions)) {
+        $output .= "<label for=\"$fieldId\">$title</label>";
+        if ($instructions) {
             $output .= "<p><small>$instructions</small></p>";
         }
-        $output .= "<input id=\"$fieldId\" type=\"text\" name=\"$field\" />";
+        $output .= "<input type=\"text\" id=\"$fieldId\" name=\"$field\" $value $placeholder $maxlength />";
 
         $output .= '</div>';
 
@@ -35,6 +45,15 @@ class PlainText extends FieldType {
 
     protected function _process(array $settings = []) {
         return $settings;
+    }
+
+    protected function fillOptions($field, $params) {
+
+        $parentOptions = parent::fillOptions($field, $params);
+        $value = isset($params['value']) ? "value=\"{$params['value']}\"" : '';
+        $placeholder = isset($params['placeholder']) ? "placeholder=\"{$params['placeholder']}\"" : '';
+        $maxlength = isset($params['max_length']) ? "maxlength=\"{$params['max_length']}\"" : '';
+        return $parentOptions + compact('value', 'placeholder', 'maxlength');
     }
 
 }

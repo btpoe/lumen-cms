@@ -18,16 +18,6 @@ class ModulesController extends Controller
         return $this->_detail(new Module);
     }
 
-    public function addDo() {
-
-        $data = Request::all();
-        $module = Module::create($data);
-        if($module) {
-            ModuleService::generateTable($module);
-        }
-        return $module ? redirect()->route('modules') : view('modules.detail');
-    }
-
     public function detail($id) {
 
         return $this->_detail(Module::findOrFail($id));
@@ -46,7 +36,21 @@ class ModulesController extends Controller
         return view('modules.detail', compact('module', 'activeFields', 'fields', 'fieldGroups'));
     }
 
+    public function addDo() {
+
+        $data = Request::all();
+        $module = Module::create($data);
+        return $this->_detailDo($module);
+    }
+
     public function detailDo($id) {
+
+        $module = Module::findOrFail($id);
+        $oldModuleSchema = $module->toArray();
+        return $this->_detailDo($module, $oldModuleSchema);
+    }
+
+    public function _detailDo(Module $module, $oldModuleSchema = false) {
 
         $data = Request::all();
 
@@ -60,11 +64,11 @@ class ModulesController extends Controller
             }
         }
 
-        $module = Module::findOrFail($id);
-        $oldModuleSchema = $module->toArray();
-        $saved = $module->update($data);
-        $module->fields()->sync($fields);
-        ModuleService::generateTable($module, $oldModuleSchema);
-        return $saved ? redirect()->route('modules') : view('modules.detail');
+        $saved =    $module->update($data) &&
+                    $module->fields()->sync($fields) &&
+                    ModuleService::generateTable($module, $oldModuleSchema);
+
+        return $saved ? redirect()->route('modules') : view('modules.detail', [$module->id]);
+
     }
 }
