@@ -1,6 +1,6 @@
 <?php
-$this->PlainText = $app->make('\App\Http\FieldTypes\PlainText');
-$this->Dropdown = $app->make('\App\Http\FieldTypes\Dropdown');
+$this->PlainText = $app->make('\App\CMS\FieldTypes\PlainText');
+$this->Dropdown = $app->make('\App\CMS\FieldTypes\Dropdown');
 ?>
 
 @extends('layout.default')

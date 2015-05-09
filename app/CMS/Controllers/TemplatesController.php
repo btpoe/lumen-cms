@@ -1,6 +1,6 @@
-<?php namespace App\Http\Controllers;
+<?php namespace App\CMS\Controllers;
 
-use \App\Http\Models\Template;
+use \App\CMS\Models\Template;
 
 class TemplatesController extends Controller
 {

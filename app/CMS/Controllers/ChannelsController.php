@@ -1,6 +1,6 @@
-<?php namespace App\Http\Controllers;
+<?php namespace App\CMS\Controllers;
 
-use \App\Http\Models\Channel;
+use \App\CMS\Models\Channel;
 
 class ChannelsController extends Controller
 {

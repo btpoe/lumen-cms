@@ -1,6 +1,6 @@
-<?php namespace App\Http\FieldTypes;
+<?php namespace App\CMS\FieldTypes;
 
-class Radios extends FieldType {
+class Checkboxes extends FieldType {
 
     public function __construct() {
         $this->Table = new Table();
@@ -10,7 +10,7 @@ class Radios extends FieldType {
 
         $output  = "";
         $output .= $this->Table->render('options', [
-            'title' => 'Radio Options',
+            'title' => 'Checkbox Options',
             'add_row' => 'Add an option',
             'cols' => [
                 [
@@ -37,7 +37,7 @@ class Radios extends FieldType {
 
             extract($option, EXTR_PREFIX_ALL, 'opt');
 
-            $output .= "<span class=\"fp-radio $opt_checked\"><input id=\"$fieldId$key\" type=\"radio\" name=\"$field\" value=\"$opt_value\" $opt_checked /></span>";
+            $output .= "<span class=\"fp-checkbox $opt_checked\"><input id=\"$fieldId$key\" type=\"checkbox\" name=\"{$field}[]\" value=\"$opt_value\" $opt_checked /></span>";
             $output .= "<label for=\"$fieldId$key\">$opt_title</label>";
         }
 
@@ -61,7 +61,7 @@ class Radios extends FieldType {
                     'value' => $key
                 ];
             }
-            $option['checked'] = isset($params['selected']) && $params['selected'] === $option['value'] ? 'checked' : '';
+            $option['checked'] = isset($params['selected']) && $params['selected'] == $option['value'] ? 'checked' : '';
             $options[] = $option;
         }
         return $parentOptions + compact('options');

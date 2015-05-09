@@ -1,4 +1,4 @@
-<?php namespace App\Http\Models;
+<?php namespace App\CMS\Models;
 
 class Module extends Model {
 
@@ -9,7 +9,7 @@ class Module extends Model {
     ];
 
     public function fields() {
-        return $this->belongsToMany('\App\Http\Models\Field')->withPivot('sort');
+        return $this->belongsToMany('\App\CMS\Models\Field')->withPivot('sort');
     }
 
 }

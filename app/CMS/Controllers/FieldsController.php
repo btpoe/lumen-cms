@@ -1,9 +1,9 @@
-<?php namespace App\Http\Controllers;
+<?php namespace App\CMS\Controllers;
 
-use \Illuminate\Support\Facades\Request;
-use \App\Http\Models\Field;
-use \App\Http\Models\FieldGroup;
-use \App\Http\Models\FieldType;
+use \Illuminate\Http\Request;
+use \App\CMS\Models\Field;
+use \App\CMS\Models\FieldGroup;
+use \App\CMS\Models\FieldType;
 
 class FieldsController extends Controller
 {
@@ -59,7 +59,7 @@ class FieldsController extends Controller
         // get field type model
         $fieldType = FieldType::findOrFail($data['type_id']);
         // digest settings (return false if invalid)
-        $settings = app()->make('\App\Http\FieldTypes\\'.$fieldType->handle)->process($settings);
+        $settings = app()->make('\App\CMS\FieldTypes\\'.$fieldType->handle)->process($settings);
 
         // remove primary settings to reduce bloat
         unset($settings['title'], $settings['handle'], $settings['instructions']);

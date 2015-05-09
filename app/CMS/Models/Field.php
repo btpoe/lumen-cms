@@ -1,4 +1,4 @@
-<?php namespace App\Http\Models;
+<?php namespace App\CMS\Models;
 
 class Field extends Model {
 
@@ -14,14 +14,14 @@ class Field extends Model {
 
     public function group()
     {
-        return $this->belongsTo('\App\Http\Models\FieldGroup');
+        return $this->belongsTo('\App\CMS\Models\FieldGroup');
     }
     public function type()
     {
-        return $this->belongsTo('\App\Http\Models\FieldType');
+        return $this->belongsTo('\App\CMS\Models\FieldType');
     }
 
     public function modules() {
-        return $this->belongsToMany('\App\Http\Models\Module');
+        return $this->belongsToMany('\App\CMS\Models\Module');
     }
 }

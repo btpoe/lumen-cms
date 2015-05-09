@@ -1,4 +1,4 @@
-<?php namespace App\Http\Models;
+<?php namespace App\CMS\Models;
 
 class FieldGroup extends Model {
 

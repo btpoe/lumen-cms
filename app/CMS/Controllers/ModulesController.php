@@ -1,11 +1,11 @@
-<?php namespace App\Http\Controllers;
+<?php namespace App\CMS\Controllers;
 
 use \Illuminate\Support\Facades\DB;
 use \Illuminate\Support\Facades\Request;
-use \App\Http\Models\Module;
-use \App\Http\Services\ModuleService;
-use \App\Http\Models\Field;
-use \App\Http\Models\FieldGroup;
+use \App\CMS\Models\Module;
+use \App\CMS\Services\ModuleService;
+use \App\CMS\Models\Field;
+use \App\CMS\Models\FieldGroup;
 
 class ModulesController extends Controller
 {
@@ -16,7 +16,7 @@ class ModulesController extends Controller
 
     public function listing($handle) {
 
-        $appDB = DB::connection('app_mysql');
+        $appDB = DB::connection('mysql');
         return view('modules.listing', ['handle' => $handle, 'entries' => $appDB->table($handle)->get()]);
     }
 
@@ -30,7 +30,7 @@ class ModulesController extends Controller
         foreach($fields as $field) {
             $entry->{$field->handle} = null;
             if (empty($fieldTypes[$field->type_id])) {
-                $fieldTypes[$field->type_id] = app()->make('\App\Http\FieldTypes\\'.$field->type->handle);
+                $fieldTypes[$field->type_id] = app()->make('\App\CMS\FieldTypes\\'.$field->type->handle);
             }
         }
         return view('modules.detail', compact('entry', 'fields', 'fieldTypes'));
@@ -43,18 +43,18 @@ class ModulesController extends Controller
         $fields = $module->fields()->orderBy('pivot_sort')->get();
         $fieldTypes = [];
         $valid = false;
-        $fieldTypes[PLAIN_TEXT_ID] = app()->make('\App\Http\FieldTypes\PlainText');
+        $fieldTypes[PLAIN_TEXT_ID] = app()->make('\App\CMS\FieldTypes\PlainText');
         $data['title'] = $fieldTypes[PLAIN_TEXT_ID]->validate($data['title'], ['maxlength' => 255]);
         foreach($fields as $field) {
             if (empty($fieldTypes[$field->type_id])) {
-                $fieldTypes[$field->type_id] = app()->make('\App\Http\FieldTypes\\'.$field->type->handle);
+                $fieldTypes[$field->type_id] = app()->make('\App\CMS\FieldTypes\\'.$field->type->handle);
             }
             $data[$field->handle] = $fieldTypes[$field->type_id]->validate($data[$field->handle], json_decode($field->settings, true));
             if (!$valid = !!$data[$field->handle]) {
                 break;
             }
         }
-        $appDB = DB::connection('app_mysql');
+        $appDB = DB::connection('mysql');
         $saved = $valid && $appDB->table($handle)->insert($data);
         return $saved ? redirect()->route('module-list', ['handle' => $handle]) : view('modules.detail', compact('entry', 'fields', 'fieldTypes'));
     }

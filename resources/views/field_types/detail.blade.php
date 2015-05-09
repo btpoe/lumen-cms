@@ -1,5 +1,5 @@
 <?php
-$this->PlainText = $app->make('\App\Http\FieldTypes\PlainText');
+$this->PlainText = $app->make('\App\CMS\FieldTypes\PlainText');
 ?>
 
 @extends('layout.default')

@@ -1,7 +1,7 @@
-<?php namespace App\Http\Controllers;
+<?php namespace App\CMS\Controllers;
 
-use \Illuminate\Support\Facades\Request;
-use \App\Http\Models\FieldType;
+use \Illuminate\Http\Request;
+use \App\CMS\Models\FieldType;
 
 class FieldTypesController extends Controller
 {
@@ -46,6 +46,6 @@ class FieldTypesController extends Controller
     public function config($id) {
 
         $fieldType = FieldType::findOrFail($id);
-        return app('\App\Http\FieldTypes\\'.$fieldType->handle)->config();
+        return app('\App\CMS\FieldTypes\\'.$fieldType->handle)->config();
     }
 }

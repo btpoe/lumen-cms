@@ -1,4 +1,4 @@
-<?php namespace App\Http\FieldTypes;
+<?php namespace App\CMS\FieldTypes;
 
 class Color extends FieldType {
 

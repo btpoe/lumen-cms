@@ -1,7 +1,7 @@
-<?php namespace App\Http\Services;
+<?php namespace App\CMS\Services;
 
-use Illuminate\Support\Facades\Schema;
-use App\Http\Models\Module;
+use \Illuminate\Support\Facades\Schema;
+use App\CMS\Models\Module;
 
 /**
  * Class ModuleService
@@ -18,30 +18,28 @@ class ModuleService {
             $module = Module::find($module)->first();
         }
 
-        $appSchema = Schema::connection('app_mysql');
-
         if ($oldSchema) {
-            if ($module->handle !== $oldSchema['handle'] && $appSchema->hasTable($oldSchema['handle'])) {
-                $appSchema->rename($oldSchema['handle'], $module->handle);
+            if ($module->handle !== $oldSchema['handle'] && Schema::hasTable($oldSchema['handle'])) {
+                Schema::rename($oldSchema['handle'], $module->handle);
             }
         }
 
-        if ($appSchema->hasTable($module->handle)) {
+        if (Schema::hasTable($module->handle)) {
 
-            $appSchema->table($module->handle, function($table) use ($appSchema, $module)
+            Schema::table($module->handle, function($table) use ($module)
             {
                 foreach($module->fields()->get() as $field) {
-                    if (!$appSchema->hasColumn($module->handle, $field->handle)) {
+                    if (!Schema::hasColumn($module->handle, $field->handle)) {
                         $table->string($field->handle);
                     }
                 }
             });
         }
         else {
-            $appSchema->create($module->handle, function($table) use ($module)
+            Schema::create($module->handle, function($table) use ($module)
             {
                 $table->increments('id');
-                $table->increments('title');
+                $table->string('title');
 
                 foreach($module->fields()->get() as $field) {
                     $table->string($field->handle);
