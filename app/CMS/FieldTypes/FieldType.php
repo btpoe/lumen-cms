@@ -11,32 +11,35 @@ class FieldType {
         return $this->_config();
     }
 
-    protected function _config() {
+    protected function _config()
+    {
         return "\nERROR: Config method not defined.\n";
     }
 
-    public function render($field, array $params = []) {
-        return $this->_render($field, $params);
+    public function render($field, array $params = [])
+    {
+        $className = explode('\\', get_class($this));
+        $className = end($className);
+        return view("partials.field-types.$className", $this->fillOptions($field, $params));
     }
 
-    protected function _render($field, array $params = []) {
-        return "\nERROR: Render method not defined.\n";
-    }
-
-    public function process(array $settings = []) {
+    public function process(array $settings = [])
+    {
         return $this->_process($settings);
     }
 
-    protected function _process(array $settings = []) {
+    protected function _process(array $settings = [])
+    {
         return false;
     }
 
-    public function validate($data, $settings) {
+    public function validate($data, $settings)
+    {
         return $data;
     }
 
-    protected function fillOptions($field, $params) {
-
+    protected function fillOptions($field, $params)
+    {
         $fieldHuman = ucwords(str_replace(['_', '-', '"'], ' ', preg_replace('/_id$/', '', $field)));
 
         if (empty($params['id'])) {
@@ -58,7 +61,7 @@ class FieldType {
             $field = "{$this->namespace}[$field]";
         }
 
-        $value = isset($params['value']) ? "value=\"{$params['value']}\"" : '';
+        $value = isset($params['value']) ? $params['value'] : '';
 
         return compact('field', 'fieldId', 'title', 'instructions', 'value');
     }

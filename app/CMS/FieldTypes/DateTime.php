@@ -2,13 +2,14 @@
 
 class DateTime extends FieldType {
 
-    public function __construct() {
+    public function __construct()
+    {
         $this->Radios = new Radios();
         $this->Dropdown = new Dropdown();
     }
 
-    protected function _config() {
-
+    protected function _config()
+    {
         $output  = "";
         $output .= $this->Radios->render('show', [
             'options' => [
@@ -16,7 +17,7 @@ class DateTime extends FieldType {
                 'time' => 'Show time',
                 'datetime' => 'Show date and time'
             ],
-            'selected' => 'date'
+            'value' => 'date'
         ]);
         $output .= $this->Dropdown->render('increment', [
             'options' => [
@@ -28,24 +29,8 @@ class DateTime extends FieldType {
         return $output;
     }
 
-    protected function _render($field, array $params = []) {
-
-        extract($this->fillOptions($field, $params));
-
-        $output = '<div class="formplate">';
-
-        $output .= "<label for=\"$fieldId\">$title</label>";
-        if (!empty($instructions)) {
-            $output .= "<p><small>$instructions</small></p>";
-        }
-        $output .= "<input id=\"$fieldId\" type=\"text\" name=\"$field\" $value />";
-
-        $output .= '</div>';
-
-        return $output;
-    }
-
-    protected function _process(array $settings = []) {
+    protected function _process(array $settings = [])
+    {
         return $settings;
     }
 

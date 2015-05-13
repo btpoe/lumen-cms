@@ -2,12 +2,13 @@
 
 class Checkboxes extends FieldType {
 
-    public function __construct() {
+    public function __construct()
+    {
         $this->Table = new Table();
     }
 
-    protected function _config() {
-
+    protected function _config()
+    {
         $output  = "";
         $output .= $this->Table->render('options', [
             'title' => 'Checkbox Options',
@@ -27,32 +28,13 @@ class Checkboxes extends FieldType {
         return $output;
     }
 
-    protected function _render($field, array $params = []) {
-
-        extract($this->fillOptions($field, $params));
-
-        $output = '<div class="formplate">';
-
-        foreach($options as $key => $option) {
-
-            extract($option, EXTR_PREFIX_ALL, 'opt');
-
-            $output .= "<span class=\"fp-checkbox $opt_checked\"><input id=\"$fieldId$key\" type=\"checkbox\" name=\"{$field}[]\" value=\"$opt_value\" $opt_checked /></span>";
-            $output .= "<label for=\"$fieldId$key\">$opt_title</label>";
-        }
-
-        $output .= '</div>';
-
-        return $output;
-    }
-
-    protected function _process(array $settings = []) {
+    protected function _process(array $settings = [])
+    {
         return $settings;
     }
 
-    protected function fillOptions($field, $params) {
-
-        $parentOptions = parent::fillOptions($field, $params);
+    protected function fillOptions($field, $params)
+    {
         $options = [];
         foreach($params['options'] as $key => $option) {
             if (!is_array($option)) {
@@ -61,10 +43,10 @@ class Checkboxes extends FieldType {
                     'value' => $key
                 ];
             }
-            $option['checked'] = isset($params['selected']) && $params['selected'] == $option['value'] ? 'checked' : '';
+            $option['checked'] = isset($params['value']) && $params['value'] == $option['value'] ? 'checked' : '';
             $options[] = $option;
         }
-        return $parentOptions + compact('options');
+        return parent::fillOptions($field, $params) + compact('options');
     }
 
 }

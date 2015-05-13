@@ -2,8 +2,8 @@
 
 class Table extends FieldType {
 
-    protected function _config() {
-
+    protected function _config()
+    {
         $output  = "";
         $output .= $this->render('table_columns', [
             'title' => 'Table Options',
@@ -43,57 +43,13 @@ class Table extends FieldType {
         return $output;
     }
 
-    protected function _render($field, array $params = []) {
-
-        extract($this->fillOptions($field, $params));
-
-        $output = '<div class="formplate" data-field-type="table">';
-        $output .= "<label for=\"$fieldId\">$title</label>";
-        if ($instructions) {
-            $output .= "<p><small>$instructions</small></p>";
-        }
-        $output .= '<table><thead><tr>';
-
-        foreach($cols as $col) {
-
-            $col_width = $col['width'];
-            $col_heading = $col['heading'];
-
-            $output .= "<th>$col_heading</th>";
-        }
-
-        $output .= '</tr></thead><tbody><tr>';
-
-        foreach($cols as $col) {
-
-            extract($col, EXTR_PREFIX_ALL, 'col');
-
-            $name =  "name=\"{$field}[0][$col_handle]\" data-namespace=\"$field\" data-field=\"$col_handle\"";
-
-            $output .= "<td data-table-type=\"$col_type\" $col_width>";
-
-            if ($col_type === 'checkbox') {
-                $output .= "<input $name type=\"checkbox\" />";
-            }
-            else {
-                $output .= "<textarea $name></textarea>";
-            }
-
-            $output .= '</td>';
-        }
-
-        $output .='</tr></tbody></table>';
-        $output .= "<button class=\"add-row\"><i class=\"fa fa-plus\"></i> $addRow</button></div>";
-
-        return $output;
-    }
-
-    protected function _process(array $settings = []) {
+    protected function _process(array $settings = [])
+    {
         return $settings;
     }
 
-    protected function fillOptions($field, $params) {
-
+    protected function fillOptions($field, $params)
+    {
         $parentOptions = parent::fillOptions($field, $params);
         $cols = $params['cols'];
         foreach($cols as &$col) {

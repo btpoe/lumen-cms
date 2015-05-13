@@ -2,8 +2,8 @@
 
 class Number extends FieldType {
 
-    protected function _config() {
-
+    protected function _config()
+    {
         $output  = '';
         $output .= $this->render('min', [
             'title' => 'Min Length'
@@ -17,34 +17,17 @@ class Number extends FieldType {
         return $output;
     }
 
-    protected function _render($field, array $params = []) {
-
-        extract($this->fillOptions($field, $params));
-
-        $output = '<div class="formplate">';
-
-        $output .= "<label for=\"$fieldId\">$title</label>";
-        if ($instructions) {
-            $output .= "<p><small>$instructions</small></p>";
-        }
-        $output .= "<input type=\"number\" id=\"$fieldId\" name=\"$field\" $min $max $decimal $value />";
-
-        $output .= '</div>';
-
-        return $output;
-    }
-
-    protected function _process(array $settings = []) {
+    protected function _process(array $settings = [])
+    {
         return $settings;
     }
 
-    protected function fillOptions($field, $params) {
-
-        $parentOptions = parent::fillOptions($field, $params);
+    protected function fillOptions($field, $params)
+    {
         $min = isset($params['min']) ? "min=\"{$params['min']}\"" : '';
         $max = isset($params['max']) ? "max=\"{$params['max']}\"" : '';
         $decimal = isset($params['decimal']) ? "data-decimal=\"{$params['decimal']}\"" : '';
-        return $parentOptions + compact('min', 'max', 'decimal');
+        return parent::fillOptions($field, $params) + compact('min', 'max', 'decimal');
     }
 
 }

@@ -2,12 +2,13 @@
 
 class MultiSelect extends FieldType {
 
-    public function __construct() {
+    public function __construct()
+    {
         $this->Table = new Table();
     }
 
-    protected function _config() {
-
+    protected function _config()
+    {
         $output  = "";
         $output .= $this->Table->render('options', [
             'title' => 'Multi-Select Options',
@@ -31,35 +32,13 @@ class MultiSelect extends FieldType {
         return $output;
     }
 
-    protected function _render($field, array $params = []) {
-
-        extract($this->fillOptions($field, $params));
-
-        $output = '<div class="formplate">';
-
-        $output .= "<label for=\"$fieldId\">$title</label>";
-        if ($instructions) {
-            $output .= "<p><small>$instructions</small></p>";
-        }
-        $output .= "<div><span class=\"fp-select\"><select multiple id=\"$fieldId\" name=\"$field\">";
-
-        foreach($options as $option) {
-            extract($option, EXTR_PREFIX_ALL, 'opt');
-
-            $output .= "<option value=\"$opt_value\" $opt_selected>$opt_title</option>";
-        }
-
-        $output .= '</select></span></div></div>';
-        return $output;
-    }
-
-    protected function _process(array $settings = []) {
+    protected function _process(array $settings = [])
+    {
         return $settings;
     }
 
-    protected function fillOptions($field, $params) {
-
-        $parentOptions = parent::fillOptions($field, $params);
+    protected function fillOptions($field, $params)
+    {
         $options = [];
         foreach($params['options'] as $key => $option) {
             if (!is_array($option)) {
@@ -68,10 +47,10 @@ class MultiSelect extends FieldType {
                     'value' => $key
                 ];
             }
-            $option['selected'] = isset($params['selected']) && $params['selected'] == $option['value'] ? 'selected' : '';
+            $option['selected'] = isset($params['value']) && $params['value'] == $option['value'] ? 'selected' : '';
             $options[] = $option;
         }
-        return $parentOptions + compact('options');
+        return parent::fillOptions($field, $params) + compact('options');
     }
 
 }
