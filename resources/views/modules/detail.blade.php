@@ -6,7 +6,7 @@
     <form method="post">
         {!! $fieldTypes[PLAIN_TEXT_ID]->render('title', ['value' => $entry->title]) !!}
         @foreach($fields as $field)
-            {!! $fieldTypes[$field->type_id]->render($field->handle, json_decode($field->settings, true)) !!}
+            {!! $fieldTypes[$field->type_id]->render($field->handle, json_decode($field->settings, true) + ['value' => $entry->{$field->handle}]) !!}
         @endforeach
         <button class="button red">Save</button>
     </form>

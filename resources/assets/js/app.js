@@ -19,12 +19,12 @@ var app = new (function App() {
 			}
 		});
 
-		var form = $('#FieldForm');
-		var settingsWrap = $('#FieldTypeSettings');
+		var form = $('#EntryForm');
+		var settingsWrap = $('#EntrySettings');
 		var originalSettings = settingsWrap.data('settings');
-		$('#FieldType').on('change', function() {
+		$('#EntryType').on('change', function() {
 			var id = this.value;
-			$.get('/settings/field-types/'+id+'/config')
+			$.get('/settings/'+settingsWrap.data('type')+'/'+id+'/config')
 				.done(function(results) {
 					settingsWrap.html(results);
 					form.populate(originalSettings);

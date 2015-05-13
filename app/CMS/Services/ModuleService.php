@@ -1,17 +1,19 @@
 <?php namespace App\CMS\Services;
 
-use \Illuminate\Support\Facades\Schema;
+use \Schema;
 use App\CMS\Models\Module;
 
 /**
  * Class ModuleService
- * @package App\Http\Services
- * @param Module $module
- * @param mixed $oldSchema
- * @returns bool
  */
 class ModuleService {
 
+    /**
+     * Generate Table
+     * @param Module $module
+     * @param mixed $oldSchema
+     * @return bool
+     */
     public static function generateTable($module, $oldSchema = false) {
 
         if (is_string($module) || is_int($module)) {
@@ -40,6 +42,8 @@ class ModuleService {
             {
                 $table->increments('id');
                 $table->string('title');
+                $table->timestamp('created_at');
+                $table->timestamp('updated_at');
 
                 foreach($module->fields()->get() as $field) {
                     $table->string($field->handle);

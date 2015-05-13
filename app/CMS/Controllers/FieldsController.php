@@ -1,6 +1,6 @@
 <?php namespace App\CMS\Controllers;
 
-use \Illuminate\Http\Request;
+use \Request;
 use \App\CMS\Models\Field;
 use \App\CMS\Models\FieldGroup;
 use \App\CMS\Models\FieldType;
@@ -32,7 +32,6 @@ class FieldsController extends Controller
     public function addDo() {
 
         $data = Request::all();
-        unset($data['settings']);
         return $this->_detailDo(Field::create($data));
     }
 
@@ -57,7 +56,7 @@ class FieldsController extends Controller
         unset($settings['group_id'], $settings['type_id']);
 
         // get field type model
-        $fieldType = FieldType::findOrFail($data['type_id']);
+        $fieldType = FieldType::find($data['type_id']);
         // digest settings (return false if invalid)
         $settings = app()->make('\App\CMS\FieldTypes\\'.$fieldType->handle)->process($settings);
 

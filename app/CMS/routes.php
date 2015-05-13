@@ -16,13 +16,12 @@ $app->post('/modules/{handle}/{id}', ['as' => 'module-detail-do', 'uses' => '\Ap
 
 // settings
 
-$app->get('/settings/channels', ['as' => 'settings-channels', 'uses' => '\App\CMS\Controllers\ChannelsController@index']);
-$app->get('/settings/channels/add', ['as' => 'settings-channel-add', 'uses' => '\App\CMS\Controllers\ChannelsController@detail']);
-$app->get('/settings/channels/{id}', ['as' => 'settings-channel-detail', 'uses' => '\App\CMS\Controllers\ChannelsController@detail']);
-
-$app->get('/settings/templates', ['as' => 'settings-templates', 'uses' => '\App\CMS\Controllers\TemplatesController@index']);
-$app->get('/settings/templates/add', ['as' => 'settings-template-add', 'uses' => '\App\CMS\Controllers\TemplatesController@detail']);
-$app->get('/settings/templates/{id}', ['as' => 'settings-template-detail', 'uses' => '\App\CMS\Controllers\TemplatesController@detail']);
+$app->get('/settings/templates', ['as' => 'settings-templates', 'uses' => '\App\CMS\Controllers\TemplatesController@settings_index']);
+$app->get('/settings/templates/add', ['as' => 'settings-template-add', 'uses' => '\App\CMS\Controllers\TemplatesController@settings_add']);
+$app->post('/settings/templates/add', ['as' => 'settings-template-add-do', 'uses' => '\App\CMS\Controllers\TemplatesController@settings_addDo']);
+$app->get('/settings/templates/{id}', ['as' => 'settings-template-detail', 'uses' => '\App\CMS\Controllers\TemplatesController@settings_detail']);
+$app->post('/settings/templates/{id}', ['as' => 'settings-template-detail-do', 'uses' => '\App\CMS\Controllers\TemplatesController@settings_detailDo']);
+$app->get('/settings/templates/{id}/config', ['as' => 'settings-template-config', 'uses' => '\App\CMS\Controllers\TemplatesController@config']);
 
 $app->get('/settings/modules', ['as' => 'settings-modules', 'uses' => '\App\CMS\Controllers\ModulesController@settings_index']);
 $app->get('/settings/modules/add', ['as' => 'settings-module-add', 'uses' => '\App\CMS\Controllers\ModulesController@settings_add']);

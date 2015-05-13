@@ -1,6 +1,6 @@
 <?php namespace App\CMS\Controllers;
 
-use \Illuminate\Http\Request;
+use \Request;
 use \App\CMS\Models\FieldType;
 
 class FieldTypesController extends Controller

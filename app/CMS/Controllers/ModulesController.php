@@ -1,7 +1,8 @@
 <?php namespace App\CMS\Controllers;
 
-use \Illuminate\Support\Facades\DB;
-use \Illuminate\Support\Facades\Request;
+use \DB;
+use \Request;
+use \Schema;
 use \App\CMS\Models\Module;
 use \App\CMS\Services\ModuleService;
 use \App\CMS\Models\Field;
@@ -16,19 +17,32 @@ class ModulesController extends Controller
 
     public function listing($handle) {
 
-        $appDB = DB::connection('mysql');
-        return view('modules.listing', ['handle' => $handle, 'entries' => $appDB->table($handle)->get()]);
+        return view('modules.listing', ['handle' => $handle, 'entries' => DB::table($handle)->get()]);
     }
 
     public function add($handle) {
 
+        $entry = new \stdClass();
+        $cols = Schema::getColumnListing($handle);
+        $entry->title = null;
+        foreach($cols as $col) {
+            $entry->{$col} = null;
+        }
+
+        return $this->_detail($handle, $entry);
+    }
+
+    public function detail($handle, $id) {
+
+        return $this->_detail($handle, DB::table($handle)->find($id));
+    }
+
+    private function _detail($handle, $entry) {
+
         $module = Module::where('handle', $handle)->firstOrFail();
         $fields = $module->fields()->orderBy('pivot_sort')->get();
         $fieldTypes = [];
-        $entry = new \stdClass();
-        $entry->title = null;
         foreach($fields as $field) {
-            $entry->{$field->handle} = null;
             if (empty($fieldTypes[$field->type_id])) {
                 $fieldTypes[$field->type_id] = app()->make('\App\CMS\FieldTypes\\'.$field->type->handle);
             }
@@ -37,6 +51,11 @@ class ModulesController extends Controller
     }
 
     public function addDo($handle) {
+
+        return $this->detailDo('foo', $handle);
+    }
+
+    public function detailDo($foo, $handle, $id = false) {
 
         $data = Request::all();
         $module = Module::where('handle', $handle)->firstOrFail();
@@ -54,15 +73,14 @@ class ModulesController extends Controller
                 break;
             }
         }
-        $appDB = DB::connection('mysql');
-        $saved = $valid && $appDB->table($handle)->insert($data);
+        if ($id) {
+            $saved = $valid && DB::table($handle)->where('id', $id)->update($data);
+        }
+        else {
+            $saved = $valid && DB::table($handle)->insert($data);
+        }
         return $saved ? redirect()->route('module-list', ['handle' => $handle]) : view('modules.detail', compact('entry', 'fields', 'fieldTypes'));
     }
-
-    public function detail($id) {
-
-    }
-
 
     public function settings_index() {
 
@@ -79,11 +97,7 @@ class ModulesController extends Controller
         return $this->_settings_detail(Module::findOrFail($id));
     }
 
-    /**
-     * @param Module $module
-     * @return \Illuminate\View\View
-     */
-    public function _settings_detail(Module $module) {
+    private function _settings_detail(Module $module) {
 
         $activeFields = $module->fields()->orderBy('pivot_sort')->get();
         $activeFieldsIds = $activeFields->keyBy('id')->keys()->toArray();
@@ -106,7 +120,7 @@ class ModulesController extends Controller
         return $this->_settings_detailDo($module, $oldModuleSchema);
     }
 
-    public function _settings_detailDo(Module $module, $oldModuleSchema = false) {
+    private function _settings_detailDo(Module $module, $oldModuleSchema = false) {
 
         $data = Request::all();
 
