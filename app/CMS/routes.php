@@ -1,5 +1,11 @@
 <?php
 
+$app->get('/singles', ['as' => 'singles', 'uses' => '\App\CMS\Controllers\SinglesController@index']);
+$app->get('/singles/add', ['as' => 'single-add', 'uses' => '\App\CMS\Controllers\SinglesController@add']);
+$app->post('/singles/add', ['as' => 'single-add-do', 'uses' => '\App\CMS\Controllers\SinglesController@addDo']);
+$app->get('/singles/{id}', ['as' => 'single-detail', 'uses' => '\App\CMS\Controllers\SinglesController@detail']);
+$app->post('/singles/{id}', ['as' => 'single-detail-do', 'uses' => '\App\CMS\Controllers\SinglesController@detailDo']);
+
 $app->get('/modules', ['as' => 'modules', 'uses' => '\App\CMS\Controllers\ModulesController@index']);
 $app->get('/modules/{handle}', ['as' => 'module-list', 'uses' => '\App\CMS\Controllers\ModulesController@listing']);
 $app->get('/modules/{handle}/add', ['as' => 'module-add', 'uses' => '\App\CMS\Controllers\ModulesController@add']);
