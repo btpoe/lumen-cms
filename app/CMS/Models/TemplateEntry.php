@@ -4,14 +4,11 @@ class TemplateEntry extends Entry {
 
     const PREFIX = 'template_';
 
-//    protected $unguarded = true;
+    protected $guarded = [];
 
-    public function __construct(array $attributes = [])
-    {
-        if (!empty($attributes['table'])) {
-            $this->table = self::PREFIX.$attributes['table'];
-            unset($attributes['table']);
-        }
-        parent::__construct($attributes);
+    public function setTable($table) {
+        $this->table = self::PREFIX.$table;
+        $fillable = array_slice(\Schema::getColumnListing($this->table), 2);
+        $this->fillable = $fillable;
     }
 }

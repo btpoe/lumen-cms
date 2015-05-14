@@ -32,6 +32,13 @@ class PlainText extends FieldType {
         return $settings;
     }
 
+    public function validate($data, $settings)
+    {
+        if (strlen($data) > $settings['max_length']) return false;
+
+        return $data;
+    }
+
     protected function fillOptions($field, $params)
     {
         $placeholder = isset($params['placeholder']) ? "placeholder=\"{$params['placeholder']}\"" : '';

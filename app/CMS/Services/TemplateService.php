@@ -44,12 +44,12 @@ class TemplateService {
             Schema::create($templateTable, function($table) use ($template)
             {
                 $table->increments('id');
-                $table->string('title');
-                $table->timestamp('created_at');
-                $table->timestamp('updated_at');
+                $table->nullableTimestamps('created_at');
+                $table->nullableTimestamps('updated_at');
+                $table->int('single_id');
 
                 foreach($template->fields()->get() as $field) {
-                    $table->string($field->handle);
+                    $table->{$field->type->db_type}($field->handle);
                 }
             });
         }

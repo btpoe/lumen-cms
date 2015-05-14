@@ -6,8 +6,7 @@ class Single extends Model {
     protected $fillable = [
         'title',
         'handle',
-        'template_id',
-        'entry_id'
+        'template_id'
     ];
 
     protected $with = ['template'];
@@ -23,15 +22,18 @@ class Single extends Model {
             return null;
         }
 
-        if (empty($this->entry_id)) {
-            $entry = \DB::connection('mysql')
-                ->table(TemplateEntry::PREFIX.$this->template->handle)->insert([]);
-            $this->entry_id = $entry->id;
-            $this->save();
+        $query = \DB::connection('mysql')->table(TemplateEntry::PREFIX.$this->template->handle);
+        $entryAttributes = $query->where('single_id', $this->id)->first();
+
+        if (empty($entryAttributes)) {
+            $entryId = $query->insertGetId($entryAttributes = ['single_id' => $this->id]);
+            $entryAttributes['id'] = $entryId;
         }
 
-        $entryModel = new TemplateEntry(['table' => $this->template->handle]);
-        return $entryModel->where('id', '=', $this->entry_id)->first();
+        $entry = new TemplateEntry((array) $entryAttributes);
+        $entry->setTable($this->template->handle);
+        $entry->exists = true;
+        return $entry;
     }
 
     public function getEntryAttribute() {

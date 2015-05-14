@@ -1,6 +1,7 @@
 <?php namespace App\CMS\Controllers;
 
 use \DB;
+use \Request;
 use \App\CMS\Models\Single;
 use \App\CMS\Models\Template;
 
@@ -65,8 +66,10 @@ class SinglesController extends Controller
                 break;
             }
         }
-        $saved = $valid && $single->update($data) && $single->entry->update($data);
 
+        $saved = $valid && $single->update($data);
+        if ($saved) $data['single_id'] = $single->id;
+        $saved = $saved && $single->entry->update($data);
         return $saved ? redirect()->route('singles') : view('singles.detail', compact('single'));
     }
 }

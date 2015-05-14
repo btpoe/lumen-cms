@@ -5,7 +5,7 @@ class Table extends FieldType {
     protected function _config()
     {
         $output  = "";
-        $output .= $this->render('table_columns', [
+        $output .= $this->render('cols', [
             'title' => 'Table Options',
             'instructions' => 'Define the columns your table should have.',
             'add_row' => 'Add a column',
@@ -48,6 +48,11 @@ class Table extends FieldType {
         return $settings;
     }
 
+    public function validate($data, $settings)
+    {
+        return json_encode($data);
+    }
+
     protected function fillOptions($field, $params)
     {
         $parentOptions = parent::fillOptions($field, $params);
@@ -57,7 +62,7 @@ class Table extends FieldType {
                 $col['heading'] : ucwords(str_replace('_', ' ', $col['handle']));
 
             $col['width'] = !empty($col['width']) ?
-                "width=\"{$col['width']}\"" : '';
+                'width="' . $col['width'] . '"' : '';
 
             $col['type'] = !empty($col['type']) && in_array($col['type'], ['single-line', 'multi-line', 'number', 'checkbox']) ?
                 $col['type'] : 'single-line';

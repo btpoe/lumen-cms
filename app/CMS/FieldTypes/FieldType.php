@@ -19,8 +19,7 @@ class FieldType {
     public function render($field, array $params = [])
     {
         $className = explode('\\', get_class($this));
-        $className = end($className);
-        return view("partials.field-types.$className", $this->fillOptions($field, $params));
+        return view('partials.field-types.'.end($className), $this->fillOptions($field, $params));
     }
 
     public function process(array $settings = [])
