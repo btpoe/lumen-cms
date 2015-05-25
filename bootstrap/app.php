@@ -90,9 +90,13 @@ $app->singleton(
 | can respond to, as well as the controllers that may handle them.
 |
 */
-define('APP_MODE', 'cms');
+if(!defined('APP_MODE')) {
+    define('APP_MODE', 'cms');
+}
 require (APP_MODE == 'cms' ? (__DIR__.'/../app/CMS/routes.php') : (__DIR__.'/../app/Http/routes.php'));
 
-define('PLAIN_TEXT_ID', 10);
+if(!defined('PLAIN_TEXT_ID')) {
+    define('PLAIN_TEXT_ID', 10);
+}
 
 return $app;

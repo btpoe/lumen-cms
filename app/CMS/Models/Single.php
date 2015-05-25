@@ -22,17 +22,19 @@ class Single extends Model {
             return null;
         }
 
-        $query = \DB::connection('mysql')->table(TemplateEntry::PREFIX.$this->template->handle);
-        $entryAttributes = $query->where('single_id', $this->id)->first();
+        $templateEntryModel = new TemplateEntry([], $this->template->handle);
 
-        if (empty($entryAttributes)) {
-            $entryId = $query->insertGetId($entryAttributes = ['single_id' => $this->id]);
+        $entry = $templateEntryModel->where('single_id', $this->id)->first();
+
+        if (count($entry)) {
+            $entryId = \DB::connection(TemplateEntry::CONNECTION)->table(TemplateEntry::PREFIX.$this->template->handle)
+                ->insertGetId($entryAttributes = ['single_id' => $this->id]);
             $entryAttributes['id'] = $entryId;
+            $entry = new TemplateEntry($entryAttributes, $this->template->handle);
+            $entry->exists = true;
         }
 
-        $entry = new TemplateEntry((array) $entryAttributes);
         $entry->setTable($this->template->handle);
-        $entry->exists = true;
         return $entry;
     }
 

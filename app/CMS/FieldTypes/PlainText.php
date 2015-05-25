@@ -34,7 +34,7 @@ class PlainText extends FieldType {
 
     public function validate($data, $settings)
     {
-        if (strlen($data) > $settings['max_length']) return false;
+        if (!empty($settings['max_length']) && strlen($data) > $settings['max_length']) return false;
 
         return $data;
     }
