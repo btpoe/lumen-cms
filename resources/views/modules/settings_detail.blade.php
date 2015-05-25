@@ -11,37 +11,47 @@ $this->PlainText = $app->make('\App\CMS\FieldTypes\PlainText');
         {!! $this->PlainText->render('title', ['value' => $module->title]) !!}
         {!! $this->PlainText->render('handle', ['value' => $module->handle]) !!}
         <div class="row">
-            <div class="well is-active">
-                <div class="well-heading">Active Fields</div>
-                <ul id="ActiveFields" data-drag-container="master">
-                    @foreach($activeFields as $field)
-                        <li class="well-card" data-group="{{ $field->group_id }}">
-                            {{ $field->title }}
-                            <input type="hidden" name="fields[]" value="{{ $field->id }}"/>
-                        </li>
-                    @endforeach
-                </ul>
+            <div class="col-md-3">
+                <div class="panel panel-primary">
+                    <div class="panel-heading">Active Fields</div>
+                    <ul class="list-group"
+                        id="ActiveFields"
+                        data-drag-container="master">
+                        @foreach($activeFields as $field)
+                            <li class="list-group-item"
+                                data-group="{{ $field->group_id }}">
+                                {{ $field->title }}
+                                <input type="hidden" name="fields[]" value="{{ $field->id }}"/>
+                            </li>
+                        @endforeach
+                    </ul>
+                </div>
             </div>
         </div>
         <button class="btn btn-danger">Save</button>
     </form>
     <div class="row">
-        <div>Available Fields</div>
+        <div class="col-sm-12">
+            <h2>Available Fields</h2>
+            <p class="help-block">Drag items to the "Active Fields" container</p>
+        </div>
         @foreach($fieldGroups as $group)
-            <div class="panel">
-                <div class="panel-heading">{{ $group->title }}</div>
-                <ul class="list-group"
-                    id="AvailableFields{{ $group->id }}"
-                    data-drag-container="slave"
-                    data-group="{{ $group->id }}">
-                    @foreach((array) $fields->get($group->id) as $field)
-                        <li class="list-group-item"
-                            data-group="{{ $group->id }}">
-                            {{ $field->title }}
-                            <input type="hidden" name="fields[]" value="{{ $field->id }}"/>
-                        </li>
-                    @endforeach
-                </ul>
+            <div class="col-md-3">
+                <div class="panel panel-default">
+                    <div class="panel-heading">{{ $group->title }}</div>
+                    <ul class="list-group"
+                        id="AvailableFields{{ $group->id }}"
+                        data-drag-container="slave"
+                        data-group="{{ $group->id }}">
+                        @foreach((array) $fields->get($group->id) as $field)
+                            <li class="list-group-item"
+                                data-group="{{ $group->id }}">
+                                {{ $field->title }}
+                                <input type="hidden" name="fields[]" value="{{ $field->id }}"/>
+                            </li>
+                        @endforeach
+                    </ul>
+                </div>
             </div>
         @endforeach
     </div>

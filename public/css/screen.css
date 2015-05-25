@@ -25,20 +25,14 @@
 [data-drag-container] {
   min-width: 20px;
   min-height: 20px; }
+  [data-drag-container] .list-group-item {
+    cursor: pointer; }
 
-body {
-  padding-left: 10px;
-  padding-right: 10px; }
-
-@media only screen and (min-width: 43.813em) {
+@media only screen and (min-width: 992px) {
   .sidebar {
-    width: 25%;
-    width: calc(200px);
-    float: left; }
+    width: calc(200px); }
   .main {
-    width: 75%;
-    width: calc(100% - 200px);
-    float: left; } }
+    width: calc(100% - 200px); } }
 
 .form-group table {
   width: 100%;
@@ -102,39 +96,6 @@ body {
   .form-group .add-row:hover, .form-group .add-row:focus {
     outline: 0;
     background: #fafafa; }
-
-.well {
-  width: 300px;
-  position: relative;
-  display: inline-block;
-  vertical-align: top;
-  padding: 8px;
-  border: 1px dashed #aaa;
-  margin: 36px 4px 16px; }
-  .well.is-active {
-    border-style: solid; }
-  .well-heading {
-    position: absolute;
-    top: -36px;
-    height: 36px;
-    line-height: 36px;
-    padding: 0 8px;
-    color: #6a6a6a;
-    border: 1px dashed #aaa;
-    border-bottom: 1px solid #fff; }
-    .is-active .well-heading {
-      border-style: solid; }
-  .well-card {
-    background: #ccc;
-    border-radius: 3px;
-    padding: 8px;
-    list-style-type: none;
-    cursor: pointer; }
-    .well-card + .well-card {
-      margin-top: 8px; }
-
-.fp-select {
-  margin-bottom: 1.5em; }
 
 
 /*# sourceMappingURL=screen.css.map */

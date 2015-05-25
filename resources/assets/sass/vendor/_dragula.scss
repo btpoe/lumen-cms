@@ -23,4 +23,8 @@
 [data-drag-container] {
 	min-width: 20px;
 	min-height: 20px;
+
+	.list-group-item {
+		cursor: pointer;
+	}
 }

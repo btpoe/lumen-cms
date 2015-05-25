@@ -31,7 +31,10 @@ $this->PlainText = $app->make('\App\CMS\FieldTypes\PlainText');
         <button class="btn btn-danger">Save</button>
     </form>
     <div class="row">
-        <div>Available Fields</div>
+        <div class="col-sm-12">
+            <h2>Available Fields</h2>
+            <p class="help-block">Drag items to the "Active Fields" container</p>
+        </div>
         @foreach($fieldGroups as $group)
             <div class="col-md-3">
                 <div class="panel panel-default">
