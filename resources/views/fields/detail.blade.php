@@ -14,8 +14,10 @@ $this->Dropdown = $app->make('\App\CMS\FieldTypes\Dropdown');
         {!! $this->PlainText->render('handle', ['maxlength' => 255, 'value' => $field->handle]) !!}
         {!! $this->PlainText->render('instructions', ['value' => $field->instructions]) !!}
         {!! $this->Dropdown->render('type_id', ['id' => 'EntryType', 'options' => $fieldTypes->lists('title', 'id'), 'value' => $field->type_id]) !!}
-        <label for="EntrySettings">Settings</label>
-        <div id="EntrySettings" data-type="field-types" data-settings="{{ $field->settings }}"></div>
+        <h2>Settings</h2>
+        <div class="well">
+            <div id="EntrySettings" data-type="field-types" data-settings="{{ $field->settings }}"></div>
+        </div>
         <button class="btn btn-danger">Save</button>
     </form>
 

@@ -65,7 +65,7 @@ class TemplatesController extends Controller
 
         $saved =    $template->update($data) &&
             $template->fields()->sync($fields) &&
-            TemplateService::generateTable($template, $oldTemplateSchema);
+            app('\App\CMS\Services\TemplateService')->generateTable($template, $oldTemplateSchema);
 
         return $saved ? redirect()->route('settings-templates') : view('templates.settings_detail');
 

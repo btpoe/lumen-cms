@@ -1,5 +1,5 @@
 @import url('bootstrap.min.css');
-@import url('bootstrap-theme.min.css');
+@import url('bootflat.min.css');
 @import url('font-awesome.min.css');
 .gu-mirror {
   position: fixed !important;
@@ -31,11 +31,17 @@
   [data-drag-container] .list-group-item {
     cursor: pointer; }
 
+body {
+  padding-top: 70px; }
+
 @media only screen and (min-width: 992px) {
   .sidebar {
     width: calc(200px); }
   .main {
     width: calc(100% - 200px); } }
+
+.nav > .nav-header {
+  padding: 10px 15px 5px; }
 
 .form-group table {
   width: 100%;

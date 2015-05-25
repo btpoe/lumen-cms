@@ -34,4 +34,22 @@ class Module extends Model {
     {
         return $this->entries();
     }
+
+    public function entryTitle($withPrefix = false) {
+        $prefix = '';
+        if ($withPrefix) {
+            $firstCharacter = strtolower(substr($this->title, 0, 1));
+            $prefix = in_array($firstCharacter, ['a', 'e', 'i', 'o', 'u']) ? 'an ' : 'a ';
+        }
+        return $prefix . \Doctrine\Common\Inflector\Inflector::singularize($this->title);
+    }
+
+    public function getEntryTitleAttribute()
+    {
+        return $this->entryTitle();
+    }
+    public function getEntryTitleWithPrefixAttribute()
+    {
+        return $this->entryTitle(true);
+    }
 }

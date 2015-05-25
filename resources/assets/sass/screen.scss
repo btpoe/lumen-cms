@@ -1,8 +1,9 @@
 @import url('bootstrap.min.css');
-@import url('bootstrap-theme.min.css');
+@import url('bootflat.min.css');
 @import url('font-awesome.min.css');
 
 @import "vendor/dragula";
 
 @import "common/layout";
+@import "modules/nav";
 @import "modules/tables";

@@ -17,7 +17,7 @@ class ModulesController extends Controller
 
     public function listing($handle) {
 
-        return view('modules.listing', ['handle' => $handle, 'entries' => DB::table($handle)->get()]);
+        return view('modules.listing', ['module' => Module::handle($handle), 'entries' => DB::table($handle)->get()]);
     }
 
     public function add($handle) {
@@ -39,7 +39,7 @@ class ModulesController extends Controller
 
     private function _detail($handle, $entry) {
 
-        $module = Module::where('handle', $handle)->firstOrFail();
+        $module = Module::handle($handle);
         $fields = $module->fields()->orderBy('pivot_sort')->get();
         $fieldTypes = [];
         foreach($fields as $field) {
@@ -47,7 +47,7 @@ class ModulesController extends Controller
                 $fieldTypes[$field->type_id] = app()->make('\App\CMS\FieldTypes\\'.$field->type->handle);
             }
         }
-        return view('modules.detail', compact('entry', 'fields', 'fieldTypes'));
+        return view('modules.detail', compact('module', 'entry', 'fields', 'fieldTypes'));
     }
 
     public function addDo($handle) {
@@ -136,7 +136,7 @@ class ModulesController extends Controller
 
         $saved =    $module->update($data) &&
                     $module->fields()->sync($fields) &&
-                    ModuleService::generateTable($module, $oldModuleSchema);
+                    app('\App\CMS\Services\ModuleService')->generateTable($module, $oldModuleSchema);
 
         return $saved ? redirect()->route('settings-modules') : view('modules.settings_detail');
 

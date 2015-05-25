@@ -2,7 +2,7 @@
 
 @section('content')
 
-    <h1>{{ empty($entry->id) ? 'Add' : 'Edit' }} a Module</h1>
+    <h1>{{ empty($entry->id) ? 'Add' : 'Edit' }} {{ $module->entry_title }}</h1>
     <form method="post">
         {!! $fieldTypes[PLAIN_TEXT_ID]->render('title', ['value' => $entry->title]) !!}
         @foreach($fields as $field)
