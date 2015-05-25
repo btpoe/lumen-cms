@@ -1,8 +1,6 @@
 <html>
 <head>
     <title>Lumen CMS</title>
-    <link rel="stylesheet" href="/css/bootstrap.min.css"/>
-    <link rel="stylesheet" href="/css/bootstrap-theme.min.css"/>
     <link rel="stylesheet" href="/css/screen.css"/>
 </head>
 <body>

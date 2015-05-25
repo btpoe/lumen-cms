@@ -1,3 +1,6 @@
+@import url('bootstrap.min.css');
+@import url('bootstrap-theme.min.css');
+@import url('font-awesome.min.css');
 .gu-mirror {
   position: fixed !important;
   margin: 0 !important;
