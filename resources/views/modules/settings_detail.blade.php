@@ -6,12 +6,12 @@ $this->PlainText = $app->make('\App\CMS\FieldTypes\PlainText');
 
 @section('content')
 
-    <h1>{{ empty($field->id) ? 'Add' : 'Edit' }} a Module</h1>
+    <h1>{{ empty($field->id) ? 'Add' : 'Edit' }} Module</h1>
     <form method="post">
         {!! $this->PlainText->render('title', ['value' => $module->title]) !!}
         {!! $this->PlainText->render('handle', ['value' => $module->handle]) !!}
         <div class="row">
-            <div class="col-md-3">
+            <div class="col-xs-12 col-sm-6 col-md-4">
                 <div class="panel panel-primary">
                     <div class="panel-heading">Active Fields</div>
                     <ul class="list-group"
@@ -36,7 +36,7 @@ $this->PlainText = $app->make('\App\CMS\FieldTypes\PlainText');
             <p class="help-block">Drag items to the "Active Fields" container</p>
         </div>
         @foreach($fieldGroups as $group)
-            <div class="col-md-3">
+            <div class="col-xs-12 col-sm-6 col-md-4">
                 <div class="panel panel-default">
                     <div class="panel-heading">{{ $group->title }}</div>
                     <ul class="list-group"

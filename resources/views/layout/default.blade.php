@@ -35,7 +35,7 @@
                 <li class="nav-divider"></li>
                 <li class="nav-header">Modules</li>
                 @foreach($modules as $module)
-                    <li role="presentation" class="{{ ($moduleLink = route('module-list', ['handle' => $module->handle])) == Request::url() ? 'active' : '' }}"><a href="{{ $moduleLink }}">{{ $module->title }}</a></li>
+                    <li role="presentation" class="{{ Request::is('modules/'.$module->handle.'*') ? 'active' : '' }}"><a href="{{ route('module-list', ['handle' => $module->handle]) }}">{{ $module->title }}</a></li>
                 @endforeach
             </ul>
         </div>
