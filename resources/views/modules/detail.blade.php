@@ -8,7 +8,7 @@
         @foreach($fields as $field)
             {!! $fieldTypes[$field->type_id]->render($field->handle, json_decode($field->settings, true) + ['value' => $entry->{$field->handle}]) !!}
         @endforeach
-        <button class="button red">Save</button>
+        <button class="btn btn-danger">Save</button>
     </form>
 
 @stop

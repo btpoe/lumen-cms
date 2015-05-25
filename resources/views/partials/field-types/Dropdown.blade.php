@@ -1,9 +1,9 @@
-<div class="formplate">
+<div class="form-group">
     <label for="{{ $fieldId }}">{{ $title }}</label>
     @if ($instructions)
-        <p><small>{{ $instructions }}</small></p>
+        <p class="help-block">{{ $instructions }}</p>
     @endif
-    <select id="{{ $fieldId }}" name="{{ $field }}">
+    <select class="form-control" id="{{ $fieldId }}" name="{{ $field }}">
         @foreach($options as $option)
             <option value="{{ $option['value'] }}" {{ $option['selected'] }}>{{ $option['title'] }}</option>
         @endforeach

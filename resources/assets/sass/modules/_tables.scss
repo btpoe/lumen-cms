@@ -1,8 +1,9 @@
 $table-border: 1px solid rgba(0, 0, 0, 0.15);
 
-.formplate {
+.form-group {
 
 	table {
+		width: 100%;
 		border: $table-border;
 		border-bottom: 0;
 		border-radius: 3px;
@@ -26,7 +27,7 @@ $table-border: 1px solid rgba(0, 0, 0, 0.15);
 	th {
 		font-size: 11px;
 		font-weight: 400;
-		color: $grey;
+		color: #999;
 		background: #fafafa;
 		background-image: linear-gradient(#fff, #fafafa);
 	}
@@ -40,13 +41,16 @@ $table-border: 1px solid rgba(0, 0, 0, 0.15);
 			border-left: 0;
 		}
 
+		input,
 		textarea {
+			width: 100%;
 			margin: 0;
 			border: 0;
 			resize: none;
 			height: 34px;
 			padding: 7px 10px;
 			line-height: 16px;
+			outline: none;
 
 			&:focus {
 				box-shadow: 0 0 2px 1px rgba(0, 158, 255, 0.25);

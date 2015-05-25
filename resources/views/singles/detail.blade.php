@@ -14,7 +14,7 @@ $this->Dropdown = $app->make('\App\CMS\FieldTypes\Dropdown');
         {!! $this->Dropdown->render('template_id', ['id' => 'EntryType', 'options' => $templates->lists('title', 'id'), 'value' => $single->template_id]) !!}
         <label for="EntrySettings">Settings</label>
         <div id="EntrySettings" data-type="templates" data-settings="{{ $entrySettings }}"></div>
-        <button class="button red">Save</button>
+        <button class="btn btn-danger">Save</button>
     </form>
 
 @stop

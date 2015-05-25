@@ -1,7 +1,7 @@
-<div class="formplate" data-field-type="table">
+<div class="form-group" data-field-type="table">
     <label for="{{ $fieldId }}">{{ $title }}</label>
     @if ($instructions)
-        <p><small>{{ $instructions }}</small></p>
+        <p class="help-block">{{ $instructions }}</p>
     @endif
     <table>
         <thead>

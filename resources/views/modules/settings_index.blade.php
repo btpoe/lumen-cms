@@ -2,7 +2,7 @@
 
 @section('content')
     <h1>Modules</h1>
-    <table>
+    <table class="table">
         <thead>
             <tr>
                 <th>Title</th>
@@ -19,6 +19,6 @@
         </tbody>
     </table>
 
-    <a class="button green" href="{{ route('settings-module-add') }}"><i class="fa fa-plus"></i> Add a Module</a>
+    <a class="btn btn-primary" href="{{ route('settings-module-add') }}"><i class="fa fa-plus"></i> Add a Module</a>
 
 @stop

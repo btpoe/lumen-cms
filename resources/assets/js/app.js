@@ -47,4 +47,5 @@ function registerFieldTypes() {
 	$('.formplate[data-field-type="table"]').ftTable();
 }
 
-$(document).ready(function() { app.init(); });
+$(document).ready(app.init);
+

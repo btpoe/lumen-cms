@@ -1,0 +1,14 @@
+@media only screen and (min-width: 43.813em) {
+
+	.sidebar {
+		width: 25%;
+		width: calc(200px);
+		float:left;
+	}
+
+	.main {
+		width: 75%;
+		width: calc(100% - 200px);
+		float:left;
+	}
+}

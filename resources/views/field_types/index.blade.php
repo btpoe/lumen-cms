@@ -3,7 +3,7 @@
 @section('content')
 
     <h1>Fields</h1>
-    <table>
+    <table class="table">
         <thead>
             <tr>
                 <th>Title</th>
@@ -20,6 +20,6 @@
         </tbody>
     </table>
 
-    <a class="button green" href="{{ route('settings-field-type-add') }}"><i class="fa fa-plus"></i> Add a Field Type</a>
+    <a class="btn btn-primary" href="{{ route('settings-field-type-add') }}"><i class="fa fa-plus"></i> Add a Field Type</a>
 
 @stop

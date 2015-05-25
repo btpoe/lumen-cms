@@ -2,7 +2,7 @@
 
 @section('content')
     <h1>Singles</h1>
-    <table>
+    <table class="table">
         <thead>
             <tr>
                 <th>Title</th>
@@ -19,6 +19,6 @@
         </tbody>
     </table>
 
-    <a class="button green" href="{{ route('single-add') }}"><i class="fa fa-plus"></i> Add a Single</a>
+    <a class="btn btn-primary" href="{{ route('single-add') }}"><i class="fa fa-plus"></i> Add a Single</a>
 
 @stop

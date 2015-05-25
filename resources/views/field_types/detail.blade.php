@@ -10,7 +10,7 @@ $this->PlainText = $app->make('\App\CMS\FieldTypes\PlainText');
     <form method="post">
         {!! $this->PlainText->render('title', ['value' => $fieldType->title]) !!}
         {!! $this->PlainText->render('handle', ['value' => $fieldType->handle]) !!}
-        <button class="button red">Save</button>
+        <button class="btn btn-danger">Save</button>
     </form>
 
 @stop

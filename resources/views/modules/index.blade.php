@@ -2,7 +2,7 @@
 
 @section('content')
     <h1>Modules</h1>
-    <table>
+    <table class="table">
         <thead>
             <tr>
                 <th>Title</th>

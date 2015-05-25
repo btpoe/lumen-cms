@@ -1,4 +1,4 @@
-<div class="formplate">
+<div class="form-group">
     @foreach($options as $key => $option)
         <span class="fp-radio {{ $option['checked'] }}">
             <input type="radio" id="{{ $fieldId.$key }}" name="{{ $field }}" value="{{ $option['value'] }}" {{ $option['checked'] }} />

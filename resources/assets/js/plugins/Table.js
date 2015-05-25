@@ -29,13 +29,29 @@ FtTable.prototype.setOptions = function (options) {
 };
 
 // attach public methods here
-FtTable.prototype.addRow = function (data) {
+FtTable.prototype.addRow = function () {
 	var ft = this;
-	var newRow = this.rowTemplate.clone();
-	this.tbody.append(newRow);
+	var newRow = ft.rowTemplate.clone();
+	ft.tbody.append(newRow);
 	newRow.find(':input').each(function(i, elem) {
 		i = $(elem);
 		elem.name = ft.namespace + '[' + newRow.index() + '][' + i.data('field') + ']';
+	});
+};
+
+FtTable.prototype.addCol = function(opts) {
+	var ft = this;
+
+	ft.table.find('thead tr').append('<th>'+opts.heading+'</th>');
+
+	var newCol = ft.rowTemplate.find('td').eq(0).clone();
+	ft.tbody.find('tr').each(function($row, row) {
+		$row = $(row);
+		var td = newCol.clone();
+		var input = td.find(':input');
+		input.attr('data-field', opts.field)
+			.get(0).name = ft.namespace + '[' + $row.index() + '][' + input.data('field') + ']';
+		$row.append(td);
 	});
 };
 
@@ -46,7 +62,12 @@ function bindEvents(table) {
 		table.addRow();
 	};
 
+	var event_addCol = function(e, data) {
+		table.addCol(data);
+	};
+
 	table.addRowBtn.on('click.ftTable', event_addClick);
+	table.wrap.on('addCol.ftTable', event_addCol);
 }
 
 $.fn.ftTable = function (options) {

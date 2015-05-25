@@ -1,7 +1,7 @@
-<div class="formplate">
+<div class="form-group">
     <label for="{{ $fieldId }}">{{ $title }}</label>
     @if ($instructions)
-        <p><small>{{ $instructions }}</small></p>
+        <p class="help-block">{{ $instructions }}</p>
     @endif
-    <input type="color" id="{{ $fieldId }}" name="{{ $field }}" value="{{ $value }}" />
+    <input class="form-control" type="color" id="{{ $fieldId }}" name="{{ $field }}" value="{{ $value }}" />
 </div>
