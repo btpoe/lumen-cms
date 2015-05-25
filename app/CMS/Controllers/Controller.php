@@ -6,6 +6,7 @@ use App\CMS\Models\Module;
 class Controller extends BaseController
 {
     public function __construct() {
-        view()->share('modules', Module::orderBy('title')->get());
+        $this->moduleService = app('\App\Http\Services\ModuleService');
+        view()->share('modules', $this->moduleService->getManifest());
     }
 }

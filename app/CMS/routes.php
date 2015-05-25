@@ -2,15 +2,15 @@
 
 $app->get('/singles', ['as' => 'singles', 'uses' => '\App\CMS\Controllers\SinglesController@index']);
 $app->get('/singles/add', ['as' => 'single-add', 'uses' => '\App\CMS\Controllers\SinglesController@add']);
-$app->post('/singles/add', ['as' => 'single-add-do', 'uses' => '\App\CMS\Controllers\SinglesController@addDo']);
 $app->get('/singles/{id}', ['as' => 'single-detail', 'uses' => '\App\CMS\Controllers\SinglesController@detail']);
+$app->post('/singles/add', ['as' => 'single-add-do', 'uses' => '\App\CMS\Controllers\SinglesController@addDo']);
 $app->post('/singles/{id}', ['as' => 'single-detail-do', 'uses' => '\App\CMS\Controllers\SinglesController@detailDo']);
 
 $app->get('/modules', ['as' => 'modules', 'uses' => '\App\CMS\Controllers\ModulesController@index']);
 $app->get('/modules/{handle}', ['as' => 'module-list', 'uses' => '\App\CMS\Controllers\ModulesController@listing']);
-$app->get('/modules/{handle}/add', ['as' => 'module-add', 'uses' => '\App\CMS\Controllers\ModulesController@add']);
-$app->post('/modules/{handle}/add', ['as' => 'module-add-do', 'uses' => '\App\CMS\Controllers\ModulesController@addDo']);
+$app->get('/modules/{handle}/add', ['as' => 'module-add', 'uses' => '\App\CMS\Controllers\ModulesController@detail']);
 $app->get('/modules/{handle}/{id}', ['as' => 'module-detail', 'uses' => '\App\CMS\Controllers\ModulesController@detail']);
+$app->post('/modules/{handle}/add', ['as' => 'module-add-do', 'uses' => '\App\CMS\Controllers\ModulesController@detailDo']);
 $app->post('/modules/{handle}/{id}', ['as' => 'module-detail-do', 'uses' => '\App\CMS\Controllers\ModulesController@detailDo']);
 
 
@@ -22,12 +22,6 @@ $app->post('/settings/templates/add', ['as' => 'settings-template-add-do', 'uses
 $app->get('/settings/templates/{id}', ['as' => 'settings-template-detail', 'uses' => '\App\CMS\Controllers\TemplatesController@settings_detail']);
 $app->post('/settings/templates/{id}', ['as' => 'settings-template-detail-do', 'uses' => '\App\CMS\Controllers\TemplatesController@settings_detailDo']);
 $app->get('/settings/templates/{id}/config', ['as' => 'settings-template-config', 'uses' => '\App\CMS\Controllers\TemplatesController@config']);
-
-$app->get('/settings/modules', ['as' => 'settings-modules', 'uses' => '\App\CMS\Controllers\ModulesController@settings_index']);
-$app->get('/settings/modules/add', ['as' => 'settings-module-add', 'uses' => '\App\CMS\Controllers\ModulesController@settings_add']);
-$app->post('/settings/modules/add', ['as' => 'settings-module-add-do', 'uses' => '\App\CMS\Controllers\ModulesController@settings_addDo']);
-$app->get('/settings/modules/{id}', ['as' => 'settings-module-detail', 'uses' => '\App\CMS\Controllers\ModulesController@settings_detail']);
-$app->post('/settings/modules/{id}', ['as' => 'settings-module-detail-do', 'uses' => '\App\CMS\Controllers\ModulesController@settings_detailDo']);
 
 $app->get('/settings/fields', ['as' => 'settings-fields', 'uses' => '\App\CMS\Controllers\FieldsController@index']);
 $app->get('/settings/fields/add', ['as' => 'settings-field-add', 'uses' => '\App\CMS\Controllers\FieldsController@add']);

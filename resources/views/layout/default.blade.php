@@ -34,8 +34,8 @@
                 <li role="presentation" class="{{ Request::is('singles') ? 'active' : '' }}"><a href="{{ route('singles')}}">Singles</a></li>
                 <li class="nav-divider"></li>
                 <li class="nav-header">Modules</li>
-                @foreach($modules as $module)
-                    <li role="presentation" class="{{ Request::is('modules/'.$module->handle.'*') ? 'active' : '' }}"><a href="{{ route('module-list', ['handle' => $module->handle]) }}">{{ $module->title }}</a></li>
+                @foreach($modules as $moduleHandle => $moduleClassName)
+                    <li role="presentation" class="{{ Request::is('modules/'.$moduleHandle.'*') ? 'active' : '' }}"><a href="{{ route('module-list', ['handle' => $moduleHandle]) }}">{{ Doctrine\Common\Inflector\Inflector::pluralize($moduleClassName) }}</a></li>
                 @endforeach
             </ul>
         </div>

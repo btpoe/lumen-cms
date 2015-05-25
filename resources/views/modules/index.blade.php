@@ -9,9 +9,9 @@
             </tr>
         </thead>
         <tbody>
-            @foreach($modules as $module)
+            @foreach($modules as $moduleHandle => $moduleClassName)
                 <tr>
-                    <td><a href="{{ route('module-list', ['handle' => $module->handle]) }}">{{ $module->title }}</a></td>
+                    <td><a href="{{ route('module-list', ['handle' => $moduleHandle]) }}">{{ Doctrine\Common\Inflector\Inflector::pluralize($moduleClassName) }}</a></td>
                 </tr>
             @endforeach
         </tbody>

@@ -7,28 +7,35 @@ $this->PlainText = $app->make('\App\CMS\FieldTypes\PlainText');
 @section('content')
 
     <h1>{{ empty($field->id) ? 'Add' : 'Edit' }} Template</h1>
-    <form method="post">
-        {!! $this->PlainText->render('title', ['value' => $template->title]) !!}
-        {!! $this->PlainText->render('handle', ['value' => $template->handle]) !!}
-        <div class="row">
-            <div class="col-xs-12 col-sm-6 col-md-4">
-                <div class="panel panel-primary">
-                    <div class="panel-heading">Active Fields</div>
-                    <ul class="list-group"
-                        id="ActiveFields"
-                        data-drag-container="master">
-                        @foreach($activeFields as $field)
-                            <li class="list-group-item"
-                                data-group="{{ $field->group_id }}">
-                                {{ $field->title }}
-                                <input type="hidden" name="fields[]" value="{{ $field->id }}"/>
-                            </li>
-                        @endforeach
-                    </ul>
+    <form class="row" method="post">
+        <div class="col-md-8">
+            <div class="panel panel-info">
+                <div class="panel-heading">General</div>
+                <div class="panel-body">
+                    {!! $this->PlainText->render('title', ['value' => $template->title]) !!}
+                    {!! $this->PlainText->render('handle', ['value' => $template->handle]) !!}
                 </div>
             </div>
         </div>
-        <button class="btn btn-danger">Save</button>
+        <div class="col-xs-12 col-sm-6 col-md-4">
+            <div class="panel panel-primary">
+                <div class="panel-heading">Active Fields</div>
+                <ul class="list-group"
+                    id="ActiveFields"
+                    data-drag-container="master">
+                    @foreach($activeFields as $field)
+                        <li class="list-group-item"
+                            data-group="{{ $field->group_id }}">
+                            {{ $field->title }}
+                            <input type="hidden" name="fields[]" value="{{ $field->id }}"/>
+                        </li>
+                    @endforeach
+                </ul>
+            </div>
+        </div>
+        <div class="col-sm-12">
+            <button class="btn btn-danger">Save</button>
+        </div>
     </form>
     <div class="row">
         <div class="col-sm-12">
