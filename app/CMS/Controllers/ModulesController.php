@@ -1,11 +1,5 @@
 <?php namespace App\CMS\Controllers;
 
-use \DB;
-use \Request;
-use \App\CMS\Models\Module;
-use \App\CMS\Models\Field;
-use \App\CMS\Models\FieldGroup;
-
 class ModulesController extends Controller
 {
     public function __construct() {
@@ -46,9 +40,9 @@ class ModulesController extends Controller
         return view('modules.detail', compact('module', 'entry', 'fields', 'fieldTypes'));
     }
 
-    public function detailDo($foo, $handle, $id = false) {
+    public function detailDo($handle, $id = null) {
 
-        $data = Request::all();
+        $data = \Request::all();
         $fields = $this->moduleService->getModelFields();
         $fieldTypes = [];
         $valid = false;
@@ -63,7 +57,7 @@ class ModulesController extends Controller
                 break;
             }
         }
-        if ($id) {
+        if (!empty($id)) {
             $saved = $valid && $this->moduleService->getModelInstance()->find($id)->update($data);
         }
         else {

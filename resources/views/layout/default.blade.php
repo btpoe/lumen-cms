@@ -17,8 +17,6 @@
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><span class="fa fa-gear"></span> Settings</a>
                         <ul class="dropdown-menu" role="menu">
                             <li><a href="{{ route('settings-templates')}}">Templates</a></li>
-                            <li><a href="{{ route('settings-modules')}}">Modules</a></li>
-                            <li class="divider"></li>
                             <li><a href="{{ route('settings-fields')}}">Fields</a></li>
                             <li><a href="{{ route('settings-field-types')}}">Field Types</a></li>
                         </ul>
